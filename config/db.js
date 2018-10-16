@@ -1,8 +1,7 @@
 
-// config/db.js
+// NOT WORKING, db is set up locally under 'lunchtime' 
+// connect postgres db to heroku
 
-//create db via mLab - a db service for mongodb
-//add a user, the url will appear above, make sure to include user and pswd
 module.exports = {
-  url: ""
+  url: "postgres://localhost:5000"
 }

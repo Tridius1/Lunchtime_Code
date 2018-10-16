@@ -24,16 +24,16 @@ module.exports = {
     var path = url.parse(req.url).pathname;
     switch (path) {
       case '/':
-        renderHTML('./content/pages/index.html', res);
+        renderHTML('./public/pages/index.html', res);
         break;
       case '/login':
-        renderHTML('./content/pages/login.html', res);
+        renderHTML('./public/pages/login.html', res);
         break;
       case '/select':
-        renderHTML('./content/pages/stockSelect.html', res);
+        renderHTML('./public/pages/stockSelect.html', res);
         break;
       case '/signup':
-        renderHTML('./content/pages/signup.html', res);
+        renderHTML('./public/pages/signup.html', res);
         break;
       default:
         res.writeHead(404);
