@@ -1,5 +1,4 @@
-
-// routes/routes.js
+//app/routes.js
 
 module.exports = function(app, db) {
   // When the app recieves a post request to the '/notes' path, it will execute the code inside the callback
