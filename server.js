@@ -1,27 +1,45 @@
 //server.js
 
-const express = require('express');
-const bodyParser = require('body-parser');
+var express = require('express');
+var  bodyParser = require('body-parser');
 var db = require('./config/db');
 
-const app = express();
-const http = require('http');
-const hostname = '127.0.0.1';
-
-const routes = require('./app/app');
+var app = express();
 
 // process.env.PORT lets the port be set by Heroku
 const PORT = process.env.PORT || 5000;
 
+// set engine to ejs
+app.set('view engine', 'ejs');
 
-// handleRequest calls a switchstatment in app/app.js that renders specific routes
-http.createServer(routes.handleRequest).listen(PORT, hostname, () => {
-  console.log('Listening on port ' + PORT + '...');
+
+// index
+app.get('/', function(req, res){
+  res.render('pages/index');
 });
+
+// sign up
+app.get('/signup', function(req, res){
+  res.render('pages/signup');
+});
+
+// log in
+app.get('/login', function(req, res){
+  res.render('pages/login');
+});
+
+// stockSelect
+app.get('/stockSelect', function(req, res){
+  res.render('pages/stockSelect');
+});
+
+app.listen(PORT);
+console.log('Listening on port ' + PORT + '...');
 
 
 // NOT WORKING! figure out how to render assets (css, js, img)
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/views'));
  
 // use this so Express can process URL encoded forms, youll see the body of the post in the terminal
 app.use(bodyParser.urlencoded({extended: true}));
+

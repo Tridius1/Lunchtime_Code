@@ -9,11 +9,12 @@
   },
   "author": "Thomas Payne",
   "license": "ISC",
-  "engines":{
+  "engines": {
     "node": "4.2.6"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
+    "ejs": "^1.0.0",
     "express": "^4.16.4"
   },
   "devDependencies": {
