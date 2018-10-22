@@ -3,7 +3,6 @@
 var express = require('express');
 var  bodyParser = require('body-parser');
 var db = require('./config/db');
-
 var app = express();
 
 // process.env.PORT lets the port be set by Heroku
@@ -11,7 +10,6 @@ const PORT = process.env.PORT || 5000;
 
 // set engine to ejs
 app.set('view engine', 'ejs');
-
 
 // index
 app.get('/', function(req, res){
@@ -36,8 +34,7 @@ app.get('/stockSelect', function(req, res){
 app.listen(PORT);
 console.log('Listening on port ' + PORT + '...');
 
-
-// NOT WORKING! figure out how to render assets (css, js, img)
+//Tell node to look into views for css/js/img 
 app.use(express.static(__dirname + '/views'));
  
 // use this so Express can process URL encoded forms, youll see the body of the post in the terminal
