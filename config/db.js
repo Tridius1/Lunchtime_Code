@@ -1,7 +1,13 @@
+var pgp = require('pg-promise')();
 
-// NOT WORKING, db is set up locally under 'lunchtime' 
-// connect postgres db to heroku
+const dbConfig = {
+   host: 'localhost',
+   port: 5000,
+   database: 'lunchtime',
+   user: 'postgres',
+   password: 'admin'
+};
 
-module.exports = {
-  url: "postgres://localhost:5000"
-}
+var db = pgp(dbConfig);
+
+module.exports = db;
