@@ -10,7 +10,6 @@ const PORT = process.env.PORT || 5000;
 // set engine to ejs
 app.set('view engine', 'ejs');
 
-
 // index
 var index = require('./routes/index');
 app.use('/', index);
