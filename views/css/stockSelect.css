@@ -1,3 +1,58 @@
 body{
-  background: darkgreen;
+  background: white;
+}
+
+h1 {
+	padding: 10px;
+}
+
+.container-fluid {
+	width: 95%;
+	border-radius: 20px;
+	background: darkseagreen;
+}
+
+#search-form {
+	width: 100%;
+	height: 6%;
+	margin: 30px;
+	border-radius: 10px;
+}
+
+#search-bar {
+	width: 100%;
+	height: 100%;
+	padding: 10px;
+	border: none;
+	border-radius: 10px;
+	background: rgba(0,0,0,0.6);
+	color: rgba(225,225,225,1);
+}
+
+.col-sm-2 {
+	height: 25%;
+	margin: 50px;
+	border-radius: 10px;
+	
+}
+
+.stock-btn {
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	background: white;
+}
+
+.stock-btn:focus {
+	border-color: turquoise;
+	border-width: 10px;
+}
+
+.stock-btn:hover {
+	border-color: lightgray;
+	border-width: 10px;
+}
+
+.pd_none {
+	padding: 0px !important;
 }

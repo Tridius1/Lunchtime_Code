@@ -3,11 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <title>stockSelect</title>
+  <%- include ../layouts/header.ejs %>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/stockSelect.css">
 </head>
 
-  <h1> SELECT YOUR STOCKS HERE! </h1>
+  <h1>Select Stocks</h1>
+
+  <div class="container-fluid">
+    <div class="row">
+        <form class="form-inline" id="search-form">
+            <input type="text" placeholder="Search..." id="search-bar">
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 pd_none">
+        	<form>
+        		<button type="button" class="btn stock-btn"></button>
+        	</form> 
+        </div>
+        <div class="col-sm-2 pd_none">
+            <form>
+        		<button type="button" class="btn stock-btn"></button>
+        	</form>
+        </div>
+        <div class="col-sm-2 pd_none"> 
+            <form>
+        		<button type="button" class="btn stock-btn"></button>
+        	</form>
+        </div>
+        <div class="col-sm-2 pd_none">
+            <form>
+        		<button type="button" class="btn stock-btn"></button>
+        	</form>
+        </div>
+        <div class="col-sm-2 pd_none"> 
+            <form>
+        		<button type="button" class="btn stock-btn"></button>
+        	</form>
+        </div>
+        <div class="col-sm-2 pd_none"> 
+            <form>
+        		<button type="button" class="btn stock-btn"></button>
+        	</form>
+        </div>
+
+    </div>
+
+
+  </div>
+
+  
 
   <script>https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js </script>
 <body>

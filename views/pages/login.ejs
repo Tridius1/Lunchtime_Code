@@ -1,18 +1,44 @@
 <html>
+<body>
 <head>
   <meta charset="UTF-8">
-  <title><%= title %></title>
+  <title>stockSelect</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/login.css">
 </head>
-
-<body>
-  <h1><%= title %> <h1>
-  <div class="jumbotron">
-    <h1> just testing bootstrap:)</h1>
+  <div class="jumboton vertical-center">
+    <div class="container-fluid text-center">
+      <div class="row">
+        <h1> Login </h1>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="form">
+          <input type="text" class="form-control" placeholder="Username" id="user">
+        </div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="form">
+          <input type="password" class="form-control" placeholder="Password" id="pwd">
+        </div>
+      </div>
+      <div class="row justify-content-md-center">
+          <form>
+            <button type="button" class="btn login-btn">Login!</button>
+          </form>
+      </div>
+      <div class="row justify-content-md-center">
+          <form class="form-inline">
+            <div class="col">
+              <p> New User?</p>
+            </div>
+            <div class="col">
+              <button type="button" class="btn sign-btn">Sign up!</button>
+            </div>
+          </form>
+      </div>
+    </div>
   </div>
-
-
   <script>https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js </script>
-</body>
+<body>
 </html>
+
