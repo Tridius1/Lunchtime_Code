@@ -13,28 +13,109 @@
     <script>
         $(document).ready(function() {
 
-            var symb = [];
+            var symb = []
+            var company_names = []
 
             var most_active_url = 'https://api.iextrading.com/1.0/stock/market/list/mostactive'
             $.ajax({url:most_active_url, dataType:"jsonp"}).then(function(data) {
                 console.log(data)
-                $('#results2').text(data[0].symbol);
 
                 var i;
                 for(i = 0 ; i < data.length; i++){
-                    symb.push(data[i].symbol);
+                    symb.push(data[i].symbol)
+                    company_names.push(data[i].companyName)
                 }
+
+                /*
+                var j;
+                for(j = 0; j < symb.length; j++){
+                    var url ='https://api.iextrading.com/1.0/stock/' + symb[j] + '/logo'
+                    var num = j + 1
+                    var str = '#results' + num
+                    $.ajax({url:url, dataType:"jsonp"}).then(function(data_url) {
+                        $(str).css({'background-image' : 'url(' + data_url.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
+                    });
+                }
+
+                */
+
+                var k;
+                for(k = 0; k < company_names.length; k++){
+                    var num = k + 1
+                    var str = '#name' + num
+                    $(str).text(company_names[k])
+                }
+
+                
+                
+                
+                var url ='https://api.iextrading.com/1.0/stock/' + symb[0] + '/logo'
+                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
+                    console.log(data)
+                    $('#results1').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
+                })
+
+                var url ='https://api.iextrading.com/1.0/stock/' + symb[1] + '/logo'
+                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
+                    console.log(data)
+                    $('#results2').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
+                })
+
+                var url ='https://api.iextrading.com/1.0/stock/' + symb[2] + '/logo'
+                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
+                    console.log(data)
+                    $('#results3').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
+                })
+
+                var url ='https://api.iextrading.com/1.0/stock/' + symb[3] + '/logo'
+                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
+                    console.log(data)
+                    $('#results4').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
+                })
+
+                var url ='https://api.iextrading.com/1.0/stock/' + symb[4] + '/logo'
+                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
+                    console.log(data)
+                    $('#results5').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
+                })
+
+                var url ='https://api.iextrading.com/1.0/stock/' + symb[5] + '/logo'
+                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
+                    console.log(data)
+                    $('#results6').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
+                })
+
+                var url ='https://api.iextrading.com/1.0/stock/' + symb[6] + '/logo'
+                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
+                    console.log(data)
+                    $('#results7').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
+                })
+
+                var url ='https://api.iextrading.com/1.0/stock/' + symb[7] + '/logo'
+                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
+                    console.log(data)
+                    $('#results8').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
+                })
+
+                var url ='https://api.iextrading.com/1.0/stock/' + symb[8] + '/logo'
+                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
+                    console.log(data)
+                    $('#results9').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
+                })
+
+                var url ='https://api.iextrading.com/1.0/stock/' + symb[9] + '/logo'
+                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
+                    console.log(data)
+                    $('#results10').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
+                })
+                
+                
                  
                 
             })
 
-            symb[0] = 'aapl';
 
-            var url ='https://api.iextrading.com/1.0/stock/' + symb[0] + '/logo'
-            $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
-                console.log(data)
-                $('#results1').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
-            })
+           
         })
         
     </script>
@@ -42,7 +123,6 @@
 </head>
 
   <h1>Select Stocks</h1>
-  <h2 id="results2">hello</h2>
 
   <div class="container-fluid">
     <div class="row">
@@ -53,33 +133,73 @@
     <div class="row">
         <div class="col-sm-2 pd_none">
         	<form>
-        		<button type="button" class="btn stock-btn" id="results1"></button>
+        		<button type="button" class="btn stock-btn" id="results1">
+                    <p id=name1>name1</p>
+                </button>
         	</form> 
         </div>
         <div class="col-sm-2 pd_none">
             <form>
-        		<button type="button" class="btn stock-btn"></button>
+        		<button type="button" class="btn stock-btn" id="results2">
+                    <p id=name2>name2</p>      
+                </button>
         	</form>
         </div>
         <div class="col-sm-2 pd_none"> 
             <form>
-        		<button type="button" class="btn stock-btn"></button>
+        		<button type="button" class="btn stock-btn" id="results3">
+                    <p id=name3>name3</p>      
+                </button>
         	</form>
         </div>
         <div class="col-sm-2 pd_none">
             <form>
-        		<button type="button" class="btn stock-btn"></button>
+        		<button type="button" class="btn stock-btn" id="results4">
+                    <p id=name4>name4</p>      
+                </button>
         	</form>
         </div>
         <div class="col-sm-2 pd_none"> 
             <form>
-        		<button type="button" class="btn stock-btn"></button>
+        		<button type="button" class="btn stock-btn" id="results5">
+                    <p id=name5>name5</p>      
+                </button>
         	</form>
         </div>
         <div class="col-sm-2 pd_none"> 
             <form>
-        		<button type="button" class="btn stock-btn"></button>
+        		<button type="button" class="btn stock-btn" id="results6">
+                    <p id=name6>name6</p>      
+                </button>
         	</form>
+        </div>
+        <div class="col-sm-2 pd_none"> 
+            <form>
+                <button type="button" class="btn stock-btn" id="results7">
+                    <p id=name7>name7</p>
+                </button>
+            </form>
+        </div>
+        <div class="col-sm-2 pd_none"> 
+            <form>
+                <button type="button" class="btn stock-btn" id="results8">
+                    <p id=name8>name8</p>
+                </button>
+            </form>
+        </div>
+        <div class="col-sm-2 pd_none"> 
+            <form>
+                <button type="button" class="btn stock-btn" id="results9">
+                    <p id=name9>name9</p>
+                </button>
+            </form>
+        </div>
+        <div class="col-sm-2 pd_none"> 
+            <form>
+                <button type="button" class="btn stock-btn" id="results10">
+                    <p id=name10>name10</p>
+                </button>
+            </form>
         </div>
 
     </div>

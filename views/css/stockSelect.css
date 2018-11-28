@@ -41,18 +41,30 @@ h1 {
 	height: 100%;
 	border-radius: 10px;
 	background: white;
+	color: rgba(225,225,225,0);
 }
+
 
 .stock-btn:focus {
 	border-color: turquoise;
 	border-width: 10px;
+
 }
 
 .stock-btn:hover {
+	color: rgba(225,225,225,1);
 	border-color: lightgray;
 	border-width: 10px;
+	background-image: none !important;
+	background: rgba(0,0,0,0.6);
+
 }
 
 .pd_none {
 	padding: 0px !important;
+}
+
+p {
+	text-align: center;
+	font-size: 11.5px;
 }
