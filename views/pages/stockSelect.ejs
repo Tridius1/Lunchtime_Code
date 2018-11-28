@@ -6,9 +6,43 @@
   <%- include ../layouts/header.ejs %>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/stockSelect.css">
+
+
+  <script src="http://code.jquery.com/jquery-2.2.0.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            var symb = [];
+
+            var most_active_url = 'https://api.iextrading.com/1.0/stock/market/list/mostactive'
+            $.ajax({url:most_active_url, dataType:"jsonp"}).then(function(data) {
+                console.log(data)
+                $('#results2').text(data[0].symbol);
+
+                var i;
+                for(i = 0 ; i < data.length; i++){
+                    symb.push(data[i].symbol);
+                }
+                 
+                
+            })
+
+            symb[0] = 'aapl';
+
+            var url ='https://api.iextrading.com/1.0/stock/' + symb[0] + '/logo'
+            $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
+                console.log(data)
+                $('#results1').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
+            })
+        })
+        
+    </script>
+
 </head>
 
   <h1>Select Stocks</h1>
+  <h2 id="results2">hello</h2>
 
   <div class="container-fluid">
     <div class="row">
@@ -19,7 +53,7 @@
     <div class="row">
         <div class="col-sm-2 pd_none">
         	<form>
-        		<button type="button" class="btn stock-btn"></button>
+        		<button type="button" class="btn stock-btn" id="results1"></button>
         	</form> 
         </div>
         <div class="col-sm-2 pd_none">
@@ -51,10 +85,9 @@
     </div>
 
 
-  </div>
-
-  
+  </div>  
 
   <script>https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js </script>
+
 <body>
 </html>
