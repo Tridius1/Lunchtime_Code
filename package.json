@@ -21,7 +21,9 @@
     "express-session": "^1.15.6",
     "express-validator": "^5.3.0",
     "method-override": "^3.0.0",
-    "pg-promise": "^8.5.1"
+    "npm": "^6.4.1",
+    "pg-promise": "^8.5.1",
+    "xmlhttprequest": "file:node_modules/xmlhttprequest"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"
