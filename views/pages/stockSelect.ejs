@@ -7,135 +7,70 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/stockSelect.css">
 
-
   <script src="http://code.jquery.com/jquery-2.2.0.js"></script>
+  <script>
+    var company = {}
 
-    <script>
-        $(document).ready(function() {
+    var symb = []
+    var company_names = []
 
-            var symb = []
-            var company_names = []
+    $(document).ready(function() {
+        var most_active_url = 'https://api.iextrading.com/1.0/stock/market/list/mostactive'
+        $.ajax({url:most_active_url, dataType:"jsonp"}).then(function(data) {
 
-            var most_active_url = 'https://api.iextrading.com/1.0/stock/market/list/mostactive'
-            $.ajax({url:most_active_url, dataType:"jsonp"}).then(function(data) {
-
-                //populate symb with symbols and company_names with names of 10 most active companies
-                var i;
-                for(i = 0 ; i < data.length; i++){
-                    symb.push(data[i].symbol)
-                    
-                    var letter_limit = 25;
-                    if(data[i].companyName.length > letter_limit){
-                        var new_str
-                        var n
-                        for(n = letter_limit; n > 0; n--){
-                            if(data[i].companyName.charAt(n) == ' '){
-                                new_str = data[i].companyName.substring(0,n)
-                                break
-                            }
+            //populate symb with symbols and company_names with names of 10 most active companies
+            var i;
+            for(i = 0 ; i < data.length; i++){
+                symb.push(data[i].symbol)
+                //cut off company name if it exceeds 25 characters
+                var letter_limit = 25;
+                if(data[i].companyName.length > letter_limit){
+                    var new_str
+                    var n
+                    for(n = letter_limit; n > 0; n--){
+                        if(data[i].companyName.charAt(n) == ' '){
+                            new_str = data[i].companyName.substring(0,n)
+                            break
                         }
-                        company_names.push(new_str)
-                    }else{
-                    
-                        company_names.push(data[i].companyName)
                     }
+                    company_names.push(new_str)
+                }else{
+                    
+                    company_names.push(data[i].companyName)
                 }
+                //populate company object
+                company[symb[i]] = company_names[i];
 
-                /*
-                var j;
-                for(j = 0; j < symb.length; j++){
-                    var url ='https://api.iextrading.com/1.0/stock/' + symb[j] + '/logo'
-                    var num = j + 1
-                    var str = '#results' + num
-                    $.ajax({url:url, dataType:"jsonp"}).then(function(data_url) {
-                        $(str).css({'background-image' : 'url(' + data_url.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
-                    });
-                }
+            }
 
-                */
 
-                //display comapny names on buttons
-                var k;
-                for(k = 0; k < company_names.length; k++){
-                    var num = k + 1
-                    var str = '#name' + num
-                    $(str).text(company_names[k])
-                }
+            var num = 1
+            Object.keys(company).forEach(function(key) {
+                //key is the company's symbol
+                //value is the company's name
+                var value = company[key];
+                console.log(key);
+                   
+                var str_logo = '#results' + num
 
-                /*
-                 * Get logo for each company 
-                 */
+                var str = '#name' + num
+                $(str).text(value)
+
+                var url ='https://api.iextrading.com/1.0/stock/' + key + '/logo'
+                $.ajax({url:url, dataType:"jsonp"}).then(function(data_url) {
+                    $(str_logo).css({'background-image' : 'url(' + data_url.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
+                });
+                num++
                 
-                var url ='https://api.iextrading.com/1.0/stock/' + symb[0] + '/logo'
-                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
-                    console.log(data)
-                    $('#results1').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
-                })
-
-                var url ='https://api.iextrading.com/1.0/stock/' + symb[1] + '/logo'
-                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
-                    console.log(data)
-                    $('#results2').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
-                })
-
-                var url ='https://api.iextrading.com/1.0/stock/' + symb[2] + '/logo'
-                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
-                    console.log(data)
-                    $('#results3').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
-                })
-
-                var url ='https://api.iextrading.com/1.0/stock/' + symb[3] + '/logo'
-                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
-                    console.log(data)
-                    $('#results4').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
-                })
-
-                var url ='https://api.iextrading.com/1.0/stock/' + symb[4] + '/logo'
-                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
-                    console.log(data)
-                    $('#results5').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
-                })
-
-                var url ='https://api.iextrading.com/1.0/stock/' + symb[5] + '/logo'
-                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
-                    console.log(data)
-                    $('#results6').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
-                })
-
-                var url ='https://api.iextrading.com/1.0/stock/' + symb[6] + '/logo'
-                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
-                    console.log(data)
-                    $('#results7').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
-                })
-
-                var url ='https://api.iextrading.com/1.0/stock/' + symb[7] + '/logo'
-                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
-                    console.log(data)
-                    $('#results8').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
-                })
-
-                var url ='https://api.iextrading.com/1.0/stock/' + symb[8] + '/logo'
-                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
-                    console.log(data)
-                    $('#results9').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
-                })
-
-                var url ='https://api.iextrading.com/1.0/stock/' + symb[9] + '/logo'
-                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
-                    console.log(data)
-                    $('#results10').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
-                })
-                
-                
-                 
-                
-            })
-
-
-           
+            });
+            
+  
         })
-        
-    </script>
+   
+    })
+      
+
+  </script>
 
 </head>
 
@@ -220,7 +155,7 @@
     </div>
   </div>  
 
-  <script>https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js </script>
+  
 
 <body>
 </html>
