@@ -28,7 +28,7 @@ h1 {
 }
 
 
-.stock-btn:focus {
+.clicked {
 	border-color: turquoise;
 	border-width: 10px;
 

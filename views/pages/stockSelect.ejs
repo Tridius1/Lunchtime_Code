@@ -9,7 +9,7 @@
 
   <script src="http://code.jquery.com/jquery-2.2.0.js"></script>
   <script>
-    var company = {}
+    var $company = {}
     var symb = []
     var company_names = []
 
@@ -47,16 +47,16 @@
                     }
 
                     //populate company object
-                    company[symb[i]] = company_names[i];
+                    $company[symb[i]] = company_names[i];
 
                 }
 
                 var num = 1
-                Object.keys(company).forEach(function(key) {
+                Object.keys($company).forEach(function(key) {
                     //key is the company's symbol
                     //value is the company's name
-                    var value = company[key];
-                    console.log(key);
+                    var value = $company[key];
+                    
                        
                     var str_logo = '#results' + num
 
@@ -72,11 +72,35 @@
                 });
             
             })
+
             
         });
+
+        //keep track of selected buttons --> has class clicked
+        $(".stock-btn").click(function() {
+            if ($(this).hasClass('clicked')) {
+               $(this).removeClass('clicked');
+            }
+              else
+            {
+               $(this).addClass('clicked');
+            }
+        })
+
+        $(".submit-btn").click(function() {
+            $(".stock-btn").each(function() {
+                if($(this).hasClass('clicked')) {
+                    var button_id = $(this).attr('id')
+                    //add to database
+                    //symbols selected
+                    console.log(symb[parseInt(button_id.match(/\d+/)) - 1])
+                }
+            })
+        })
    
     })
       
+
 
   </script>
 
