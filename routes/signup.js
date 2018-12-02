@@ -30,6 +30,7 @@ app.post('/', function(request, response){
             password: request.sanitize('password').escape().trim(),
 	          watchlist: '{"APPL", "TSLA", "FB"}'
         };
+  console.log(item.email);
 
    var query = "insert into users values(DEFAULT, '" + item.email + "', '" + item.user + "', '" + item.password + "','" + item.watchlist + "');";
    console.log(query);
