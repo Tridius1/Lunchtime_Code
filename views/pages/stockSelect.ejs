@@ -62,10 +62,10 @@
 
                       var str_name = '#name' + num
                       $(str_name).text(value)
-
+                      /*
                       var str_symb = '#symb' + num
                       $(str_symb).text(key)
-
+                      */
                       //fetches company's logo
                       var url ='https://api.iextrading.com/1.0/stock/' + key + '/logo'
                       $.ajax({url:url, dataType:"jsonp"}).then(function(data_url) {
@@ -136,7 +136,7 @@
                     -->
                     <button type="button" class="btn stock-btn" id="results1">
                         <p id=name1>name1</p>
-                        <input type="hidden" id=symb1 name="symb1" value="<%= symb1 %>"/> 
+                        
                     </button>
                 </div>
                 <div class="col-sm-2 pd_none">
@@ -149,7 +149,7 @@
                 -->
                     <button type="button" class="btn stock-btn" id="results2">
                         <p id=name2>name2</p>
-                        <input type="hidden" id=symb2 name="symb2" value="<%= symb2 %>"/>
+                        
                     </button>
                 
                 </div>
@@ -163,7 +163,7 @@
                 -->
                     <button type="button" class="btn stock-btn" id="results3">
                         <p id=name3>name3</p>
-                        <input type="hidden" id=symb3 name="symb3" value="<%= symb3 %>"/> 
+                        
                     </button>
                 
                 </div>
@@ -177,7 +177,7 @@
                 -->
                     <button type="button" class="btn stock-btn" id="results4">
                         <p id=name4>name4</p>
-                        <input type="hidden" id=symb4 name="symb4" value="<%= symb4 %>"/>
+                        
                     </button>
             
                 </div>
@@ -191,7 +191,7 @@
                 -->
                     <button type="button" class="btn stock-btn" id="results5">
                         <p id=name5>name5</p>
-                        <input type="hidden" id=symb5 name="symb5" value="<%= symb5 %>"/>
+                       
                     </button>
                 </div>
                 <div class="col-sm-2 pd_none"> 
@@ -204,7 +204,7 @@
                 -->
                     <button type="button" class="btn stock-btn" id="results6">
                         <p id=name6>name6</p>
-                        <input type="hidden" id=symb6 name="symb6" value="<%= symb6 %>"/>
+                        
                     </button>
                 
                 </div>
@@ -219,7 +219,7 @@
 
                     <button type="button" class="btn stock-btn" id="results7">
                         <p id=name7>name7</p>
-                        <input type="hidden" id=symb7 name="symb7" value="<%= symb7 %>"/> 
+                        
                     </button>
                
                 </div>
@@ -233,7 +233,7 @@
                 -->
                     <button type="button" class="btn stock-btn" id="results8">
                         <p id=name8>name8</p>
-                        <input type="hidden" id=symb8 name="symb8" value="<%= symb8 %>"/>
+                        
                     </button>
                    
                 </div>
@@ -247,7 +247,7 @@
                 -->
                     <button type="button" class="btn stock-btn" id="results9">
                         <p id=name9>name9</p>
-                        <input type="hidden" id=symb9 name="symb9" value="<%= symb9 %>"/>
+                        
                     </button>
                   
                 </div>
@@ -261,13 +261,13 @@
                     -->
                     <button type="button" class="btn stock-btn" id="results10">
                             <p id=name10>name10</p>
-                            <input type="hidden" id=symb10 name="symb10" value="<%= symb10 %>"/>
+                          
                     </button>
                    
                 </div>
         </div>
         <div class="row justify-content-md-center">
-             <input type="Submit" class="btn submit-btn" id="submit-id" name="symb11" value="<%= symb11 %>"/>
+             <input type="Submit" class="btn submit-btn" id="submit-id" name="stock_list" value="<%= stock_list %>"/>
         </div>
     </form>
   </div>  

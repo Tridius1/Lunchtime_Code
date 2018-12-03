@@ -5,17 +5,7 @@ app.get('/', function(req, res){
   //render views/stockSelect.ejs template file
   res.render('pages/stockSelect', {
   	title: 'STOCKSELECT',
-  	symb1: '0',
-  	symb2: '1',
-  	symb3: '2',
-  	symb4: '3',
-  	symb5: '4',
-  	symb6: '5',
-  	symb7: '6',
-  	symb8: '7',
-  	symb9: '8',
-  	symb10: '9',
-  	symb11: 'Add to List'
+  	stock_list: 'Add to List'
   })
 
 
@@ -31,22 +21,13 @@ app.post('/', function (request, response) {
     var errors = request.validationErrors();
     if (!errors) { // No validation errors
         var item = {
-            symb1: request.sanitize('symb1').escape(),
-            symb2: request.sanitize('symb2').escape(),
-		  	symb3: request.sanitize('symb3').escape(),
-		  	symb4: request.sanitize('symb4').escape(),
-		  	symb5: request.sanitize('symb5').escape(),
-		  	symb6: request.sanitize('symb6').escape(),
-		  	symb7: request.sanitize('symb7').escape(),
-		  	symb8: request.sanitize('symb8').escape(),
-		  	symb9: request.sanitize('symb9').escape(),
-		  	symb10: request.sanitize('symb10').escape(),
-		  	symb11: request.sanitize('symb11').escape()
+		  	stock_list: request.sanitize('stock_list').escape()
         };
     }
 
     //string of symbols seperated by commas
-    console.log(item.symb11)
+    console.log(item.stock_list)
+
 
 /*
         // Running SQL query to insert data into the store table
