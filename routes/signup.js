@@ -19,7 +19,7 @@ app.get('/', function(req, res){
 app.post('/', function(request, response){
   request.assert('email', 'email is required').notEmpty();
   request.assert('user', 'user is required').notEmpty();
-  request.assert('password', 'price is required').notEmpty();
+  request.assert('password', 'password is required').notEmpty();
 
   var errors = request.validationErrors();
     if (!errors) { // No validation errors
