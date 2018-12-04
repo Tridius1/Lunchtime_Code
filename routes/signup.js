@@ -37,6 +37,7 @@ app.post('/', function(request, response){
 	 db.none(query)
             .then(function (result) {
                 request.flash('success', 'Data added successfully!');
+
                 response.render('pages/signup', {
                     email: '',
                     user: '',
