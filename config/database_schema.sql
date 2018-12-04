@@ -1,9 +1,9 @@
 CREATE TABLE "users" (
 	"id" serial NOT NULL,
 	"email" TEXT NOT NULL UNIQUE,
-	"user" TEXT NOT NULL UNIQUE,
+	"username" TEXT NOT NULL UNIQUE,
 	"password" TEXT,
-	"Watchlist" varchar(4) ARRAY,
+	"watchlist" TEXT[],
 	CONSTRAINT Users_pk PRIMARY KEY ("id")
 ) WITH (
 OIDS=FALSE

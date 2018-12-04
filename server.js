@@ -45,6 +45,16 @@ app.use(session({
 }));
 app.use(flash());
 
+//sessions
+var session = require('client-sessions');
+
+app.use(session({
+  cookieName: 'session',
+  secret: 'random_string_goes_here',
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+}));
+
 // index
 var index = require('./routes/index');
 app.use('/', index);

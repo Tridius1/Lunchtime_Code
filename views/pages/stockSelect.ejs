@@ -7,220 +7,270 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/stockSelect.css">
 
-
   <script src="http://code.jquery.com/jquery-2.2.0.js"></script>
 
-    <script>
-        $(document).ready(function() {
+  <script>
+      var $company = {}
+      var symb = []
+      var company_names = []
 
-            var symb = []
-            var company_names = []
+      $(document).ready(function() {
+          var most_active_url = 'https://api.iextrading.com/1.0/stock/market/list/mostactive'
+          $.getJSON(most_active_url,function(json){
+              var stock_url
+              //if there is data --> selected stocks displays companies that are the most active else display in focus companies
+              if(json.length == 0){
+                  stock_url = 'https://api.iextrading.com/1.0/stock/market/list/infocus'
+              }else{
+                  stock_url = 'https://api.iextrading.com/1.0/stock/market/list/mostactive'
+              }
+              
+              $.ajax({url:stock_url, dataType:"jsonp"}).then(function(data) {
+                  //populate symb with symbols and company_names with names
+                  var i;
+                  for(i = 0 ; i < data.length; i++){
+                      symb.push(data[i].symbol)
+                      //cut off company name if it exceeds 25 characters
+                      var letter_limit = 25;
+                      if(data[i].companyName.length > letter_limit){
+                          var new_str
+                          var n
+                          for(n = letter_limit; n > 0; n--){
+                              if(data[i].companyName.charAt(n) == ' '){
+                                  new_str = data[i].companyName.substring(0,n)
+                                  break
+                              }
+                          }
+                          company_names.push(new_str)
+                      }else{
+                          
+                          company_names.push(data[i].companyName)
+                      }
 
-            var most_active_url = 'https://api.iextrading.com/1.0/stock/market/list/mostactive'
-            $.ajax({url:most_active_url, dataType:"jsonp"}).then(function(data) {
+                      //populate company object
+                      $company[symb[i]] = company_names[i];
 
-                //populate symb with symbols and company_names with names of 10 most active companies
-                var i;
-                for(i = 0 ; i < data.length; i++){
-                    symb.push(data[i].symbol)
-                    
-                    var letter_limit = 25;
-                    if(data[i].companyName.length > letter_limit){
-                        var new_str
-                        var n
-                        for(n = letter_limit; n > 0; n--){
-                            if(data[i].companyName.charAt(n) == ' '){
-                                new_str = data[i].companyName.substring(0,n)
-                                break
-                            }
-                        }
-                        company_names.push(new_str)
-                    }else{
-                    
-                        company_names.push(data[i].companyName)
-                    }
-                }
+                  }
 
-                /*
-                var j;
-                for(j = 0; j < symb.length; j++){
-                    var url ='https://api.iextrading.com/1.0/stock/' + symb[j] + '/logo'
-                    var num = j + 1
-                    var str = '#results' + num
-                    $.ajax({url:url, dataType:"jsonp"}).then(function(data_url) {
-                        $(str).css({'background-image' : 'url(' + data_url.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
-                    });
-                }
+                  var num = 1
+                  Object.keys($company).forEach(function(key) {
+                      //key is the company's symbol
+                      //value is the company's name
+                      var value = $company[key];
+                         
+                      var str_logo = '#results' + num
 
-                */
+                      var str_name = '#name' + num
+                      $(str_name).text(value)
+                      /*
+                      var str_symb = '#symb' + num
+                      $(str_symb).text(key)
+                      */
+                      //fetches company's logo
+                      var url ='https://api.iextrading.com/1.0/stock/' + key + '/logo'
+                      $.ajax({url:url, dataType:"jsonp"}).then(function(data_url) {
+                      $(str_logo).css({'background-image' : 'url(' + data_url.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
+                      });
+                      num++
+                      
+                  });
+              
+              })
 
-                //display comapny names on buttons
-                var k;
-                for(k = 0; k < company_names.length; k++){
-                    var num = k + 1
-                    var str = '#name' + num
-                    $(str).text(company_names[k])
-                }
+              
+          });
 
-                /*
-                 * Get logo for each company 
-                 */
-                
-                var url ='https://api.iextrading.com/1.0/stock/' + symb[0] + '/logo'
-                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
-                    console.log(data)
-                    $('#results1').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
-                })
+          //keep track of selected buttons --> has class clicked
+          $(".stock-btn").click(function() {
+              if ($(this).hasClass('clicked')) {
+                 $(this).removeClass('clicked');
+              }
+                else
+              {
+                 $(this).addClass('clicked');
+              }
+          })
 
-                var url ='https://api.iextrading.com/1.0/stock/' + symb[1] + '/logo'
-                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
-                    console.log(data)
-                    $('#results2').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
-                })
+          $(".submit-btn").click(function() {
+            var clicked_symbs = []
+              $(".stock-btn").each(function() {
+                  if($(this).hasClass('clicked')) {
+                      var button_id = $(this).attr('id')
+                      //add to database
+                      //symbols selected
+                      clicked_symbs.push(symb[parseInt(button_id.match(/\d+/)) - 1])
+                      //console.log(symb[parseInt(button_id.match(/\d+/)) - 1])
+                  }
+              })
+              $("#submit-id").val(clicked_symbs)
+              //window.location.href='/';
 
-                var url ='https://api.iextrading.com/1.0/stock/' + symb[2] + '/logo'
-                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
-                    console.log(data)
-                    $('#results3').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
-                })
+          })
 
-                var url ='https://api.iextrading.com/1.0/stock/' + symb[3] + '/logo'
-                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
-                    console.log(data)
-                    $('#results4').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
-                })
+      })
 
-                var url ='https://api.iextrading.com/1.0/stock/' + symb[4] + '/logo'
-                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
-                    console.log(data)
-                    $('#results5').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
-                })
+  </script>
 
-                var url ='https://api.iextrading.com/1.0/stock/' + symb[5] + '/logo'
-                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
-                    console.log(data)
-                    $('#results6').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
-                })
-
-                var url ='https://api.iextrading.com/1.0/stock/' + symb[6] + '/logo'
-                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
-                    console.log(data)
-                    $('#results7').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
-                })
-
-                var url ='https://api.iextrading.com/1.0/stock/' + symb[7] + '/logo'
-                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
-                    console.log(data)
-                    $('#results8').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
-                })
-
-                var url ='https://api.iextrading.com/1.0/stock/' + symb[8] + '/logo'
-                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
-                    console.log(data)
-                    $('#results9').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
-                })
-
-                var url ='https://api.iextrading.com/1.0/stock/' + symb[9] + '/logo'
-                $.ajax({url:url, dataType:"jsonp"}).then(function(data) {
-                    console.log(data)
-                    $('#results10').css({'background-image' : 'url(' + data.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
-                })
-                
-                
-                 
-                
-            })
-
-
-           
-        })
-        
-    </script>
 
 </head>
+
+  <% if (messages.error) { %>
+    <p style="color:red"><%- messages.error %></p>
+  <% } %>
+  <% if (messages.success) { %>
+    <p style="color:green"><%- messages.success %></p>
+  <% } %>
 
   <h1>Select Stocks</h1>
 
   <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-2 pd_none">
-        	<form>
-        		<button type="button" class="btn stock-btn" id="results1">
-                    <p id=name1>name1</p>
-                </button>
-        	</form> 
-        </div>
-        <div class="col-sm-2 pd_none">
-            <form>
-        		<button type="button" class="btn stock-btn" id="results2">
-                    <p id=name2>name2</p>      
-                </button>
-        	</form>
-        </div>
-        <div class="col-sm-2 pd_none"> 
-            <form>
-        		<button type="button" class="btn stock-btn" id="results3">
-                    <p id=name3>name3</p>      
-                </button>
-        	</form>
-        </div>
-        <div class="col-sm-2 pd_none">
-            <form>
-        		<button type="button" class="btn stock-btn" id="results4">
-                    <p id=name4>name4</p>      
-                </button>
-        	</form>
-        </div>
-        <div class="col-sm-2 pd_none"> 
-            <form>
-        		<button type="button" class="btn stock-btn" id="results5">
-                    <p id=name5>name5</p>      
-                </button>
-        	</form>
-        </div>
-        <div class="col-sm-2 pd_none"> 
-            <form>
-        		<button type="button" class="btn stock-btn" id="results6">
-                    <p id=name6>name6</p>      
-                </button>
-        	</form>
-        </div>
-        <div class="col-sm-2 pd_none"> 
-            <form>
-                <button type="button" class="btn stock-btn" id="results7">
-                    <p id=name7>name7</p>
-                </button>
-            </form>
-        </div>
-        <div class="col-sm-2 pd_none"> 
-            <form>
-                <button type="button" class="btn stock-btn" id="results8">
-                    <p id=name8>name8</p>
-                </button>
-            </form>
-        </div>
-        <div class="col-sm-2 pd_none"> 
-            <form>
-                <button type="button" class="btn stock-btn" id="results9">
-                    <p id=name9>name9</p>
-                </button>
-            </form>
-        </div>
-        <div class="col-sm-2 pd_none"> 
-            <form>
-                <button type="button" class="btn stock-btn" id="results10">
-                    <p id=name10>name10</p>
-                </button>
-            </form>
-        </div>
+    <form action="/stockSelect" method="post">
+        <div class="row">
+                <div class="col-sm-2 pd_none">
+                    <!--
+                		<div type="text" class="btn stock-btn" id="results1" name="symb1" value="1">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="symb1" value="option1">
+                            </div>
+                        </div>
+                    -->
+                    <button type="button" class="btn stock-btn" id="results1">
+                        <p id=name1>name1</p>
+                        
+                    </button>
+                </div>
+                <div class="col-sm-2 pd_none">
+                <!--
+                    <div type="text" class="btn stock-btn" id="results2" name="symb2" value="2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="symb2" value="option2">
+                        </div>
+                    </div>
+                -->
+                    <button type="button" class="btn stock-btn" id="results2">
+                        <p id=name2>name2</p>
+                        
+                    </button>
+                
+                </div>
+                <div class="col-sm-2 pd_none"> 
+                <!--
+                    <div type="text" class="btn stock-btn" id="results3" name="symb3" value="3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="symb3" value="option3">
+                        </div>
+                    </div>
+                -->
+                    <button type="button" class="btn stock-btn" id="results3">
+                        <p id=name3>name3</p>
+                        
+                    </button>
+                
+                </div>
+                <div class="col-sm-2 pd_none">
+                <!--
+                    <div type="text" class="btn stock-btn" id="results4" name="symb4" value="4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="symb4" value="option4">
+                        </div>
+                    </div>
+                -->
+                    <button type="button" class="btn stock-btn" id="results4">
+                        <p id=name4>name4</p>
+                        
+                    </button>
+            
+                </div>
+                <div class="col-sm-2 pd_none">
+                <!-- 
+                   <div type="text" class="btn stock-btn" id="results5" name="symb5" value="5">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="symb5" value="option5">
+                        </div>
+                    </div>
+                -->
+                    <button type="button" class="btn stock-btn" id="results5">
+                        <p id=name5>name5</p>
+                       
+                    </button>
+                </div>
+                <div class="col-sm-2 pd_none"> 
+                <!--
+                    <div type="text" class="btn stock-btn" id="results6" name="symb6" value="6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="symb6" value="option6">
+                        </div>
+                    </div>
+                -->
+                    <button type="button" class="btn stock-btn" id="results6">
+                        <p id=name6>name6</p>
+                        
+                    </button>
+                
+                </div>
+                <div class="col-sm-2 pd_none"> 
+                <!--
+                    <div type="text" class="btn stock-btn" id="results7" name="symb7" value="7">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="symb7" value="option7">
+                        </div>
+                    </div>
+                -->
 
-    </div>
-    <div class="row justify-content-md-center">
-         <button type="button" class="btn submit-btn">Add to List</button>
-    </div>
+                    <button type="button" class="btn stock-btn" id="results7">
+                        <p id=name7>name7</p>
+                        
+                    </button>
+               
+                </div>
+                <div class="col-sm-2 pd_none"> 
+                <!--
+                    <div type="text" class="btn stock-btn" id="results8" name="symb8" value="8">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="symb8" value="option8">
+                        </div>
+                    </div>
+                -->
+                    <button type="button" class="btn stock-btn" id="results8">
+                        <p id=name8>name8</p>
+                        
+                    </button>
+                   
+                </div>
+                <div class="col-sm-2 pd_none"> 
+                <!--
+                    <div type="text" class="btn stock-btn" id="results9" name="symb9" value="9">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="symb9" value="option9">
+                        </div>
+                    </div>
+                -->
+                    <button type="button" class="btn stock-btn" id="results9">
+                        <p id=name9>name9</p>
+                        
+                    </button>
+                  
+                </div>
+                <div class="col-sm-2 pd_none"> 
+                    <!--
+                    <div type="text" class="btn stock-btn" id="results10" name="symb10" value="10">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="symb10" value="option10">
+                        </div>
+                    </div>
+                    -->
+                    <button type="button" class="btn stock-btn" id="results10">
+                            <p id=name10>name10</p>
+                          
+                    </button>
+                   
+                </div>
+        </div>
+        <div class="row justify-content-md-center">
+             <input type="Submit" class="btn submit-btn" id="submit-id" name="stock_list" value="<%= stock_list %>"/>
+        </div>
+    </form>
   </div>  
 
-  <script>https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js </script>
-
-<body>
+</body>
 </html>

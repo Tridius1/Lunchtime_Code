@@ -28,7 +28,7 @@ h1 {
 }
 
 
-.stock-btn:focus {
+.clicked {
 	border-color: turquoise;
 	border-width: 10px;
 
@@ -68,3 +68,4 @@ p {
 	border-color: lightgray;
 	border-width: 5px;
 }
+
