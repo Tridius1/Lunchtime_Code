@@ -37,9 +37,10 @@ app.post('/', function(request, response){
                 	response.redirect('/login')
                 }
                 else {
+                	request.session.user = result[0];
+                	
 	                response.redirect('/')
 
-	                request.session.user = result[0];
             	}
 
             }).catch(function (err) {
