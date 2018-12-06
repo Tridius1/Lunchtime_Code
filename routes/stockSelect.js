@@ -19,7 +19,7 @@ module.exports = app;
 app.put('/', function (req, res) {
 
 	//change for later
-	var user_id = 1;
+	var user_id = req.session.user.id;
 	var stocks = [];
 
     var errors = req.validationErrors();

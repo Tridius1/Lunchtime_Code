@@ -19,9 +19,10 @@ app.get('/', function(req, res){
   	}
 
 });
-
+/*
 app.use('/', function(err, req, res, next){
 console.log(err);
    //User should be authenticated! Redirect him to log in.
    res.redirect('/login');
 });
+*/
