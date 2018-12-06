@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html>
+<body>
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <%- include /layouts/header.ejs %>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/index.css">
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <!--<script src="https://cdn.plot.ly/plotly-latest.min.js">-->
+  <script>
+    $(document).ready(function(){
+        var stock_input;
+        var url = 'https://api.iextrading.com/1.0/stock/aapl/chart/1m';
+	$.getJSON(url, function(apldata) {
+	    document.write(apldata[1].date);
+	}
+    });
+  </script>
+</head>
+
+  <h1>INDEX PAGE</h1>
+  <h2><a href="stockSelect"> StockSelect</a> </h2>
+  
+  <div class="container-fluid">
+  	<h3> Your Stocks </h3>
+    <div class="row">
+        <div class="col-sm-8 pd_none">
+            <form>
+        		<button type="button" id="btn2" class="btn stock-btn">Load data (AAPL 1d)</button>
+        	</form>
+        </div>
+    </div>
+  
+  </div>
+
+
+
+<script src="http://code.jquery.com/jquery-2.2.0.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js">
+
+
+
+
+<td>Select a stock symbol: </td>
+<input type="TEXT" id="stock_input" size="8">
+<input type="button" id="submit" value="Submit">
+
+<div class="wrapper">
+    <div id="chart"></div>
+
+    <script>
+        
+        var $company = {}
+        var arrHigh = []
+        var arrLow = [1, 2, 3];
+        var arrDate = []
+        var testurl = 'https://api.iextrading.com/1.0/stock/aapl/chart/1m';
+        
+            function getData() {
+                var arr = [];
+                for(let i=0;i<10;i++)
+                    arr.push(Array(10).fill().map(() => Math.random()))
+                return arr;
+            }
+
+        var data3 = getData()
+        console.log(data3)
+	Plotly.newPlot('chart', [{
+            z: data3,
+            type: 'surface'
+        }]);
+
+</script>
+</div>
+
+
+
+    <div class="wrapper">
+        <div id="chart"></div>
+        <script>
+            function getData() {
+                var arr = [1,2,3];
+                return arr;
+            }
+            var data = getData();
+            console.log(data);
+
+            Plotly.newPlot('chart', [{
+                   z: data,
+                   type: 'surface'
+            }]);
+        </script>
+    </div>
+
+
+<div class="wrapper">
+	<div id="chart2"></div>
+	<script>
+	url = 'https://api.iextrading.com/1.0/stock/aapl/chart/1m'
+	let x1 = []
+	let y1 = []
+	
+	$.getJSON(url, function
+
+
+	Plotly.json(url, function(figure){
+		let data = figure.data
+		for (var i=0; i < data.length; i++){
+			x1.push(data[i][0])
+			y1.push(data[i][1])
+		}
+		let trace = {
+			x: x1,
+			y: y1 
+		}
+	}
+	</script>
+</div>
+
+
+<form action="/" method="post" name="form1">
+    <table width="25%" border="0">
+        <tr>
+
+        </tr>
+    </table>
+</form>
+
+  <script>https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js </script>
+  <script type="text/javascript"  src="./routes/index"></script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html>
+<body>
 <head>
   <meta charset="UTF-8">
   <title><%= title %></title>
@@ -10,10 +11,13 @@
 
   <script src="http://code.jquery.com/jquery-2.2.0.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js">
-  
   <script>
     $(document).ready(function(){
         var stock_input;
+        var url = 'https://api.iextrading.com/1.0/stock/aapl/chart/1m'
+        $.ajax({url:url, dataType:"jsonp"}).then(function(data){
+	    console.log(data)
+	}
         $("#submit").click(function(){
             stock_input=$("#stock_input").val();
             $.post("http://localhost:5000",{stock_input: stock_input}, function(data){
@@ -23,41 +27,9 @@
                 }
             });
         });
-
-	var $company = {}
-	var arrHigh = []
-	var arrLow = []
-	var arrDate = []
-        var bookmark_placeholders = ["https://api.iextrading.com/1.0/stock/aapl/chart/1m",
-				     "https://api.iextrading.com/1.0/stock/amzn/chart/1m",
-				     "https://api.iextrading.com/1.0/stock/msft/chart/1m",
-                                     "https://api.iextrading.com/1.0/stock/nflx/chart/1m"]
-        for(var i = 0; i < bookmark_placeholders.length; i++){
-        
-            $.getJSON(bookmark_placeholders[i],function(json){
-                var stock_url
-                var current_bookmark = bookmark_placeholders[i];
-                var bean = 124
-		var div = document.getElementById("data35")
-		div.innerHTML = bean
-		$.ajax({url:current_bookmark, dataType:"jsonp"}).then(function(data){
-	            for(var j = 0; j < 10; j++){
-	                arrHigh.push(data[j].high)
-			document.getElementById("data34").innerHTML = arrHigh[i]
-		        arrLow.push(data[j].low)
-			arrDate.push(data[j].date)
-		    }
-	        }
-	    }
-
-        });
-      }
-
-    }
-
   </script>
 </head>
-<body>
+
   <h1>INDEX PAGE</h1>
   <h2><a href="stockSelect"> StockSelect</a> </h2>
   
@@ -73,20 +45,48 @@
   
   </div>
 
-<script>
-var ball = 3+4;
-document.getElementById('add_results_7').innerHTML=ball;
-</script>
 
 
+<script src="http://code.jquery.com/jquery-2.2.0.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js">
 
-<div id="add_results_7"></div>
 
 
 
 <td>Select a stock symbol: </td>
 <input type="TEXT" id="stock_input" size="8">
 <input type="button" id="submit" value="Submit">
+
+<div class="wrapper">
+    <div id="chart"></div>
+
+    <script>
+        
+        var $company = {}
+        var arrHigh = []
+        var arrLow = []
+        var arrDate = []
+        var testurl = 'https://api.iextrading.com/1.0/stock/aapl/chart/1m';
+
+        $.getJSON(url,function(json){
+            $.ajax(type: "GET", {url:testurl, dataType:"jsonp"}).then(function(data){
+                for(var j = 0; j < 10; j++){
+                    arrHigh.push(data[j].high)
+                    arrLow.push(data[j].low)
+		    arrDate.push(data[j].date)
+                }
+                var data2 = arrHigh
+                console.log(data2)
+                Plotly.newPlot('chart', [{
+                    z: data2,
+                    type: 'surface'
+                }]);
+            })
+        });
+</script>
+</div>
+
+
 
 
 

@@ -27,5 +27,14 @@
   },
   "devDependencies": {
     "nodemon": "^1.18.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tridius1/Lunchtime_Code.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Tridius1/Lunchtime_Code/issues"
+  },
+  "homepage": "https://github.com/Tridius1/Lunchtime_Code#readme"
 }

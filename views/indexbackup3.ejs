@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html>
+<body>
 <head>
   <meta charset="UTF-8">
   <title><%= title %></title>
@@ -12,6 +13,13 @@
   <script src="https://cdn.plot.ly/plotly-latest.min.js">
   
   <script>
+    function getData() {
+        var arr = [];
+        for(let i=0;i<10;i++){
+            arr.push(Array(10).fill().map(() => Math.random()))
+	}
+        return arr;
+    }
     $(document).ready(function(){
         var stock_input;
         $("#submit").click(function(){
@@ -23,6 +31,40 @@
                 }
             });
         });
+
+	Plotly.d3.csv("https://api.iextrading.com/1.0/stock/amzn/chart/1m", function(err, rows){
+            function unpack(rows, key) {
+            return rows.map(function(row) { return row[key]; });
+        }
+
+        var trace1 = {
+  type: "scatter",
+  mode: "lines",
+  name: 'AAPL High',
+  x: unpack(rows, 'Date'),
+  y: unpack(rows, 'High'),
+  line: {color: '#17BECF'}
+}
+
+var trace2 = {
+  type: "scatter",
+  mode: "lines",
+  name: 'AAPL Low',
+  x: unpack(rows, 'Date'),
+  y: unpack(rows, 'Low'),
+  line: {color: '#7F7F7F'}
+}
+
+var data = [trace1,trace2];
+
+var layout = {
+  title: 'Basic Time Series',
+};
+
+Plotly.newPlot('myDiv', data, layout);
+})
+
+
 
 	var $company = {}
 	var arrHigh = []
@@ -37,13 +79,9 @@
             $.getJSON(bookmark_placeholders[i],function(json){
                 var stock_url
                 var current_bookmark = bookmark_placeholders[i];
-                var bean = 124
-		var div = document.getElementById("data35")
-		div.innerHTML = bean
-		$.ajax({url:current_bookmark, dataType:"jsonp"}).then(function(data){
+                $.ajax({url:current_bookmark, dataType:"jsonp"}).then(function(data){
 	            for(var j = 0; j < 10; j++){
 	                arrHigh.push(data[j].high)
-			document.getElementById("data34").innerHTML = arrHigh[i]
 		        arrLow.push(data[j].low)
 			arrDate.push(data[j].date)
 		    }
@@ -57,7 +95,7 @@
 
   </script>
 </head>
-<body>
+
   <h1>INDEX PAGE</h1>
   <h2><a href="stockSelect"> StockSelect</a> </h2>
   
@@ -73,22 +111,37 @@
   
   </div>
 
-<script>
-var ball = 3+4;
-document.getElementById('add_results_7').innerHTML=ball;
-</script>
-
-
-
-<div id="add_results_7"></div>
-
-
 
 <td>Select a stock symbol: </td>
 <input type="TEXT" id="stock_input" size="8">
 <input type="button" id="submit" value="Submit">
 
 
+
+
+
+<table>
+  <tr>
+    <th>date</th><th>high</th>
+  </tr>
+  <% data.forEach(function(data, index) { %>
+    <tr>
+      <td><%= data.date %></td>
+      <td><%= data.high %></td>
+    </tr>    
+  <% }) %>
+</table>
+
+
+
+<th>test</th>
+
+<ul>
+  <% data.forEach(function(data){ %>
+    <%= data.date %>
+    <%= data.high %>
+  <% })%>
+</ul>
 
 
 <form action="/" method="post" name="form1">

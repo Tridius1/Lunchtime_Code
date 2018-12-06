@@ -1,17 +1,111 @@
+<!DOCTYPE html>
+
 <html>
 <body>
 <head>
   <meta charset="UTF-8">
-  <title>Index</title>
+  <title><%= title %></title>
   <%- include /layouts/header.ejs %>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/index.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  <script>
+    $(document).ready(function(){
+        var stock_input;
+        $("#submit").click(function(){
+          stock_input=$("#stock_input").val();
+          $.post("http://localhost:5000",{stock_input: stock_input}, function(data){
+            if(data==='done')
+              {
+                alert("request success");
+              }
+          });
+        });
+      });
+  </script>
 </head>
 
   <h1>INDEX PAGE</h1>
   <h2><a href="stockSelect"> StockSelect</a> </h2>
+  
+  <div class="container-fluid">
+  	<h3> Your Stocks </h3>
+    <div class="row">
+        <div class="col-sm-8 pd_none">
+        	<form>
+        		<button type="button" class="btn stock-btn"></button>
+        	</form> 
+        </div>
+        <div class="col-sm-8 pd_none">
+            <form>
+        		<button type="button" id="btn2" class="btn stock-btn">Load data (AAPL 1d)</button>
+        	</form>
+        </div>
+        <div class="col-sm-8 pd_none"> 
+            <form>
+        		<button type="button" class="btn stock-btn"></button>
+        	</form>
+        </div>
+        <div class="col-sm-8 pd_none">
+            <form>
+        		<button type="button" class="btn stock-btn"></button>
+        	</form>
+        </div>
+        <div class="col-sm-8 pd_none"> 
+            <form>
+        		<button type="button" class="btn stock-btn"></button>
+        	</form>
+        </div>
 
+    </div>
+  
+  </div>
+
+
+<td>Select a stock symbol: </td>
+<input type="TEXT" id="stock_input" size="8">
+<input type="button" id="submit" value="Submit">
+
+
+
+
+
+<table>
+  <tr>
+    <th>date</th><th>high</th>
+  </tr>
+  <% data.forEach(function(data, index) { %>
+    <tr>
+      <td><%= data.date %></td>
+      <td><%= data.high %></td>
+    </tr>    
+  <% }) %>
+</table>
+
+
+
+
+
+<th>test</th>
+
+<ul>
+  <% data.forEach(function(data){ %>
+    <%= data.date %>
+    <%= data.high %>
+  <% })%>
+</ul>
+
+
+<form action="/" method="post" name="form1">
+    <table width="25%" border="0">
+        <tr>
+
+        </tr>
+    </table>
+</form>
 
   <script>https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js </script>
+  <script type="text/javascript"  src="./routes/index"></script>
 </body>
 </html>
