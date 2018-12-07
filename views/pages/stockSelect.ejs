@@ -24,9 +24,10 @@
               }else{
                   stock_url = 'https://api.iextrading.com/1.0/stock/market/list/mostactive'
               }
-              
+
               $.ajax({url:stock_url, dataType:"jsonp"}).then(function(data) {
                   //populate symb with symbols and company_names with names
+                  console.log(data);
                   var i;
                   for(i = 0 ; i < data.length; i++){
                       symb.push(data[i].symbol)
@@ -43,7 +44,7 @@
                           }
                           company_names.push(new_str)
                       }else{
-                          
+
                           company_names.push(data[i].companyName)
                       }
 
@@ -57,7 +58,7 @@
                       //key is the company's symbol
                       //value is the company's name
                       var value = $company[key];
-                         
+
                       var str_logo = '#results' + num
 
                       var str_name = '#name' + num
@@ -72,12 +73,12 @@
                       $(str_logo).css({'background-image' : 'url(' + data_url.url + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
                       });
                       num++
-                      
+
                   });
-              
+
               })
 
-              
+
           });
 
           //keep track of selected buttons --> has class clicked
@@ -136,7 +137,7 @@
                     -->
                     <button type="button" class="btn stock-btn" id="results1">
                         <p id=name1>name1</p>
-                        
+
                     </button>
                 </div>
                 <div class="col-sm-2 pd_none">
@@ -149,11 +150,11 @@
                 -->
                     <button type="button" class="btn stock-btn" id="results2">
                         <p id=name2>name2</p>
-                        
+
                     </button>
-                
+
                 </div>
-                <div class="col-sm-2 pd_none"> 
+                <div class="col-sm-2 pd_none">
                 <!--
                     <div type="text" class="btn stock-btn" id="results3" name="symb3" value="3">
                         <div class="form-check">
@@ -163,9 +164,9 @@
                 -->
                     <button type="button" class="btn stock-btn" id="results3">
                         <p id=name3>name3</p>
-                        
+
                     </button>
-                
+
                 </div>
                 <div class="col-sm-2 pd_none">
                 <!--
@@ -177,12 +178,12 @@
                 -->
                     <button type="button" class="btn stock-btn" id="results4">
                         <p id=name4>name4</p>
-                        
+
                     </button>
-            
+
                 </div>
                 <div class="col-sm-2 pd_none">
-                <!-- 
+                <!--
                    <div type="text" class="btn stock-btn" id="results5" name="symb5" value="5">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="symb5" value="option5">
@@ -191,10 +192,10 @@
                 -->
                     <button type="button" class="btn stock-btn" id="results5">
                         <p id=name5>name5</p>
-                       
+
                     </button>
                 </div>
-                <div class="col-sm-2 pd_none"> 
+                <div class="col-sm-2 pd_none">
                 <!--
                     <div type="text" class="btn stock-btn" id="results6" name="symb6" value="6">
                         <div class="form-check">
@@ -204,11 +205,11 @@
                 -->
                     <button type="button" class="btn stock-btn" id="results6">
                         <p id=name6>name6</p>
-                        
+
                     </button>
-                
+
                 </div>
-                <div class="col-sm-2 pd_none"> 
+                <div class="col-sm-2 pd_none">
                 <!--
                     <div type="text" class="btn stock-btn" id="results7" name="symb7" value="7">
                         <div class="form-check">
@@ -219,11 +220,11 @@
 
                     <button type="button" class="btn stock-btn" id="results7">
                         <p id=name7>name7</p>
-                        
+
                     </button>
-               
+
                 </div>
-                <div class="col-sm-2 pd_none"> 
+                <div class="col-sm-2 pd_none">
                 <!--
                     <div type="text" class="btn stock-btn" id="results8" name="symb8" value="8">
                         <div class="form-check">
@@ -233,11 +234,11 @@
                 -->
                     <button type="button" class="btn stock-btn" id="results8">
                         <p id=name8>name8</p>
-                        
+
                     </button>
-                   
+
                 </div>
-                <div class="col-sm-2 pd_none"> 
+                <div class="col-sm-2 pd_none">
                 <!--
                     <div type="text" class="btn stock-btn" id="results9" name="symb9" value="9">
                         <div class="form-check">
@@ -247,11 +248,11 @@
                 -->
                     <button type="button" class="btn stock-btn" id="results9">
                         <p id=name9>name9</p>
-                        
+
                     </button>
-                  
+
                 </div>
-                <div class="col-sm-2 pd_none"> 
+                <div class="col-sm-2 pd_none">
                     <!--
                     <div type="text" class="btn stock-btn" id="results10" name="symb10" value="10">
                         <div class="form-check">
@@ -261,16 +262,16 @@
                     -->
                     <button type="button" class="btn stock-btn" id="results10">
                             <p id=name10>name10</p>
-                          
+
                     </button>
-                   
+
                 </div>
         </div>
         <div class="row justify-content-md-center">
              <input type="Submit" class="btn submit-btn" id="submit-id" name="stock_list" value="<%= stock_list %>"/>
         </div>
     </form>
-  </div>  
+  </div>
 
 </body>
 </html>

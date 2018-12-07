@@ -1,8 +1,9 @@
 var express = require('express');
 var db = require('../config/db');
 var app = express();
-module.exports = app;
+//module.exports = app;
 
+var session = require('express-session');
 
 app.get('/', function(req, res){
   	//render views/login.ejs template file
@@ -12,6 +13,18 @@ app.get('/', function(req, res){
     	password: ''
 	})
 });
+
+
+var cookieSession = require('cookie-session');
+
+
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+}));
+
+
 
 // upon that request at the /login endpoint
 app.post('/', function(request, response){
@@ -25,21 +38,20 @@ app.post('/', function(request, response){
             user: request.sanitize('user').escape().trim(),
             password: request.sanitize('password').escape().trim()
         };
-  console.log(item.email);
+   //console.log(item.email);
 
    var query = "SELECT id, username FROM users WHERE username = '" + item.user + "' AND password ='" + item.password + "';";
-   console.log(query);
+   //console.log(query);
 	 db.any(query)
             .then(function (result) {
-
             	if (result.length === 0) {
-            		request.flash('error', 'Username or password is incorrect.');
+            		  request.flash('error', 'Username or password is incorrect.');
                 	response.redirect('/login')
                 }
                 else {
 	                response.redirect('/')
-
 	                request.session.user = result[0];
+                  //console.log(request.session.user.id);
             	}
 
             }).catch(function (err) {
