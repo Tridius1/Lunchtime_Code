@@ -47,7 +47,7 @@ h1 {
 }
 
 .form {
-	width: 90%;
+	width: 100%;
 }
 
 .login-btn {
@@ -63,5 +63,9 @@ h1 {
 
 .sign-btn {
 	background: white;
+}
+
+.bigform {
+  width: 90%;
 }
 

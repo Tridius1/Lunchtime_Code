@@ -28,7 +28,7 @@ app.post('/', function(request, response){
             email: request.sanitize('email').escape().trim(),
             user: request.sanitize('user').escape().trim(),
             password: request.sanitize('password').escape().trim(),
-	          watchlist: '{"WFC", "AMD", "CHK"}'
+	          watchlist: '{}'
         };
    //console.log(item.email);
 
@@ -38,11 +38,28 @@ app.post('/', function(request, response){
             .then(function (result) {
                 request.flash('success', 'Data added successfully!');
 
+                var user_id;
+
+                db.any("SELECT COUNT(*) FROM users;").then(function(red){
+                    user_id = (parseInt(red[0].count) + 1).toString();
+                    db.any("SELECT id, username FROM users WHERE id=" + user_id + ";").then(function(rez){
+                        request.session.user = rez[0];
+                        response.redirect('/')
+                    }).catch(function(err) {
+                        request.flash('error', err);
+                    })
+                }).catch(function (err) {
+                    request.flash('error', err);
+                })
+                
+                /*
                 response.render('pages/signup', {
                     email: '',
                     user: '',
                     password: ''
                 })
+                */
+                
             }).catch(function (err) {
             request.flash('error', err);
             response.render('pages/signup', {

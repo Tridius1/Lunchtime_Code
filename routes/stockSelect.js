@@ -22,6 +22,7 @@ app.put('/', function (req, res) {
 	var user_id = req.session.user.id;
 	var stocks = [];
 
+
     var errors = req.validationErrors();
     if (!errors) { // No validation errors
         stock_list = req.sanitize('stock_list').escape();
