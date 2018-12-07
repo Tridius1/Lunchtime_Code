@@ -3,43 +3,48 @@ body{
 }
 
 h3 {
-	font-size: 30px;
-	padding: 30px;
-	width:100%;
+  font-size: 30px;
+  padding-top: 20px;
+}
+.header{
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  display:flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+.container{
+  width: 80vw;
+  background: white;
+  border-radius: 5px;
+  border: 2px solid black;
+  display: flex;
+  flex-direction:column;
+  justify-content: space-between;
 }
 
-.container-fluid {
-	width: 20%;
-	float: left;
-	border-radius: 20px;
-	background: darkseagreen;
-	margin: 30px;
+.buttonContainer{
+ width: 100%;
+ background: white;
+ display: flex;
+ flex-direction: row;
+ justify-content: space-around;
+ margin: 20px;
+ border-radius: 5px;
 }
 
-.col-sm-8 {
-	height: 15%;
-	margin: 40px;
-	border-radius: 10px;
-	
+.btnStock{
+  height: 100px;
+  width: 100px;
+  margin: 10px;
+  border: solid 1px black;
+  border-radius: 3px;
 }
 
-.stock-btn {
-	width: 100%;
-	height: 100%;
-	border-radius: 10px;
-	background: white;
-}
-
-.stock-btn:focus {
-	border-color: turquoise;
-	border-width: 10px;
-}
-
-.stock-btn:hover {
-	border-color: lightgray;
-	border-width: 10px;
-}
-
-.pd_none {
-	padding: 0px !important;
+#tester{
+  /* max-width:500px;
+  height:500px;
+  margin:auto;
+  margin-bottom: 20px; */
 }

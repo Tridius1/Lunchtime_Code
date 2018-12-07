@@ -19,47 +19,27 @@
 </script>
 
 </head>
-
-  <h1>INDEX PAGE</h1>
-  <h2><a href="stockSelect">StockSelect</a> </h2>
-
-  <% if (messages.error) { %>
-   <p style="color:red"><%- messages.error %></p>
-  <% } %>
-  <% if (messages.success) { %>
-     <p style="color:green"><%- messages.success %></p>
-  <% } %>
-  <div class="container-fluid">
+  <div class="header">
+    <h1>INDEX PAGE</h1>
+    <% if (messages.error) { %>
+     <p style="color:red;margin-top: 15px;"><%- messages.error %></p>
+    <% } %>
+    <% if (messages.success) { %>
+       <p style="color:green;margin-top: 15px;"><%- messages.success %></p>
+    <% } %>
+  </div>
+  <div class="container">
   	<h3> Your Stocks </h3>
     <div class="row">
-        <div class="col-sm-8 pd_none">
-        	<form>
-        		<button type="button" class="btn stock-btn"></button>
-        	</form>
-        </div>
-        <div class="col-sm-8 pd_none">
-            <form>
-        		<button type="button" class="btn stock-btn"></button>
-        	</form>
-        </div>
-        <div class="col-sm-8 pd_none">
-            <form>
-        		<button type="button" class="btn stock-btn"></button>
-        	</form>
-        </div>
-        <div class="col-sm-8 pd_none">
-            <form>
-        		<button type="button" class="btn stock-btn"></button>
-        	</form>
-        </div>
-        <div class="col-sm-8 pd_none">
-            <form>
-        		<button type="button" class="btn stock-btn"></button>
-        	</form>
+        <div class="buttonContainer">
+        		<button type="button" class="btnStock"></button>
+            <button type="button" class="btnStock"></button>
+            <button type="button" class="btnStock"></button>
+            <button type="button" class="btnStock"></button>
         </div>
     </div>
-  </div>
-  <div id="tester" style="max-width:600px;height:250px; margin:auto"></div>
 
+    <div id="tester"></div>
+  </div>
 </body>
 </html>
