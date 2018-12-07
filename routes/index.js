@@ -1,22 +1,26 @@
 var express = require('express');
 var db = require('../config/db');
 var app = express();
-var session = require('express-session');
 var https = require('axios');
 var jsonQuery = require('json-query');
 
+module.exports = app;
+
 app.get('/', function (request, response) {
     //var query = 'select watchlist from users where id = $1';
-
-    db.any('select watchlist from users where id = $1', 1)
+  // if(request.session.user)
+    //console.log(id);
+    if(request.session.user){
+    var id = request.session.user.id;
+    db.any('select watchlist from users where id = $1', id)
     .then(data => {
             request.flash('success', 'Data returned successfully!');
 
-            //WILL USE THIS LINE BELOW
-            //var myList = data[0].watchlist;
+            var myList = data[0].watchlist;
 
-            //LINE BELOW IS FOR TESTING
-            var myList = ['WFC', 'AMD', 'CHK'];
+            //LINE BELOW IS FOR TES//console.log(request.session.user.id);TING
+            //var myList = ['WFC', 'AMD', 'CHK'];
+
             var highs = [];
             https.get('https://api.iextrading.com/1.0/stock/market/list/mostactive')
             .then(function(res) {
@@ -26,6 +30,7 @@ app.get('/', function (request, response) {
 
               response.render('index', {
                title: 'INDEX PAGE',
+               user: request.session.user,
                x: Array.from(Array(highs.length).keys()),
                y: highs
               });
@@ -35,16 +40,17 @@ app.get('/', function (request, response) {
           });
     })
     .catch(function (err) {
-        // display error message in case an error
         request.flash('error', err);
         response.render('index', {
           title: 'INDEX PAGE',
+          user: request.session.user,
           x1: '',
           x2: ''
        })
     })
+  }
+  else{
+    var err = new Error("Not logged in!");
+    response.redirect('/login');
+  }
 });
-
-
-
-module.exports = app;

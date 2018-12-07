@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var db = require('../config/db');
 
 app.get('/', function(req, res){
   //render views/stockSelect.ejs template file
@@ -15,167 +16,60 @@ app.get('/', function(req, res){
 module.exports = app;
 
 
-app.post('/', function (request, response) {
+app.put('/', function (req, res) {
 
+	//change for later
+	var user_id = req.session.user.id;
+	var stocks = [];
 
-    var errors = request.validationErrors();
+    var errors = req.validationErrors();
     if (!errors) { // No validation errors
-        var item = {
-		  	stock_list: request.sanitize('stock_list').escape()
-        };
-    }
+        stock_list = req.sanitize('stock_list').escape();
 
-    //string of symbols seperated by commas
-    console.log(item.stock_list)
+        //make stock_list an array
+        var i;
+        var new_str = stock_list;
+        for(i = 0; i < new_str.length-1; i++){
+        	if(new_str.charAt(i) == ','){
+        		stocks.push(new_str.substring(0,i));
+        		new_str = new_str.substring(i+1,new_str.length);
+        		i = 0;
+        	}
+        }
+        //last symbol
+        stocks.push(new_str);
 
+        /*
+        // Fetch the id of the item from the request.
+        var itemId = req.params.id;
+        */
 
-/*
+        //make query to enter new array into user table
+        var j;
+        var updateQuery = "UPDATE users SET watchlist='{";
+        for(j = 0; j < stocks.length; j++){
+        	if(j != stocks.length - 1){
+        		updateQuery+= '"' + stocks[j] + '",';
+        	}else{
+        		updateQuery+= '"' + stocks[j] + '"';
+        	}
+    	}
+    	updateQuery+= "}' WHERE id = " + user_id + ";";
+
         // Running SQL query to insert data into the store table
-        db.none('INSERT INTO store(sname, qty, price) VALUES($1, $2, $3)', [item.sname, item.qty, item.price])
+
+        db.none(updateQuery)
             .then(function (result) {
-                request.flash('success', 'Data added successfully!');
-                // render views/store/add.ejs
-                response.render('store/add', {
-                    title: 'Add New Item',
-                    sname: '',
-                    qty: '',
-                    price: ''
-                })
-            }).catch(function (err) {
-            request.flash('error', err);
-            // render views/store/add.ejs
-            response.render('store/add', {
-                title: 'Add New Item',
-                sname: item.sname,
-                qty: item.qty,
-                price: item.price
+            	console.log("success!");
+                req.flash('success', 'Data updated successfully!');
+ 				res.redirect('/');
             })
-        })
-    } else {
-        var error_msg = errors.reduce((accumulator, current_error) => accumulator + '<br />' + current_error.msg, '');
-        request.flash('error', error_msg);
-        response.render('store/add', {
-            title: 'Add New Item',
-            sname: request.body.sname,
-            qty: request.body.qty,
-            price: request.body.price
-        })
+            .catch(function (err) {
+                req.flash('error', err);
+            })
     }
-*/
+    else {
+        var error_msg = errors.reduce((accumulator, current_error) => accumulator + '<br />' + current_error.msg, '');
+        req.flash('error', error_msg);
+    }
 });
-
-
-//app.post('/', function (request, response) {
-
-
-    // Validate user input - ensure non emptiness
-    //request.assert('symb1', 'symb1 is required').notEmpty();
-    
-    //var errors = request.validationErrors();
-    //if (!errors) { // No validation errors
-    	/*
-        var item = {
-            // sanitize() is a function used to prevent Hackers from inserting
-            // malicious code(as data) into our database. There by preventing
-            // SQL-injection attacks.
-            symb1: ''
-        };
-
-   var tmp = request.body.symb1
-   console.log("this is tmp " + tmp);
-
-   */
- 
-    /*
-  $(document).reeady(function() {
-  	
-
-
-	const req = require('request');
-
-	var url = 'https://api.iextrading.com/1.0/stock/market/list/infocus';
-	$.ajax({url:stock_url, dataType:"jsonp"}).then(function(data) {
-		var i;
-		for(i = 0; i < data.length; i++){
-			console.log(data.symbol);
-		}
-	});
-  });
-  */
-/*
-  var http = require('https://api.iextrading.com/1.0/stock/market/list/infocus');
-
-   http.get({
-       
-   }, function(response) {
-       // Continuously update stream with data
-       var body = '';
-       response.on('data', function(d) {
-           body += d;
-       });
-       response.on('end', function() {
-
-           // Data reception is done, do whatever with it!
-           var parsed = JSON.parse(body);
-
-           console.log(parsed)
-
-       });
-
-
-   });
-   */
-    //}
-
-    
-    /*
-        // Running SQL query to insert data into the store table
-        db.none('INSERT INTO store(sname, qty, price) VALUES($1, $2, $3)', [item.sname, item.qty, item.price])
-            .then(function (result) {
-                request.flash('success', 'Data added successfully!');
-                // render views/store/add.ejs
-                response.render('store/add', {
-                    title: 'Add New Item',
-                    sname: '',
-                    qty: '',
-                    price: ''
-                })
-            }).catch(function (err) {
-            request.flash('error', err);
-            // render views/store/add.ejs
-            response.render('store/add', {
-                title: 'Add New Item',
-                sname: item.sname,
-                qty: item.qty,
-                price: item.price
-            })
-        })
-    } else {
-        var error_msg = errors.reduce((accumulator, current_error) => accumulator + '<br />' + current_error.msg, '');
-        request.flash('error', error_msg);
-        response.render('store/add', {
-            title: 'Add New Item',
-            sname: request.body.sname,
-            qty: request.body.qty,
-            price: request.body.price
-        })
-    }
-    */
-//});
-
-
-
-
-
-
-
-
-
- 
-
-    
-
-
-
-
-

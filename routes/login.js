@@ -1,9 +1,7 @@
 var express = require('express');
 var db = require('../config/db');
 var app = express();
-//module.exports = app;
-
-var session = require('express-session');
+module.exports = app;
 
 app.get('/', function(req, res){
   	//render views/login.ejs template file
@@ -14,18 +12,6 @@ app.get('/', function(req, res){
 	})
 });
 
-
-var cookieSession = require('cookie-session');
-
-
-app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true
-}));
-
-
-
 // upon that request at the /login endpoint
 app.post('/', function(request, response){
   request.assert('user', 'user is required').notEmpty();
@@ -34,14 +20,11 @@ app.post('/', function(request, response){
   var errors = request.validationErrors();
     if (!errors) { // No validation errors
 	var item = {
-            // sanitize() is a function used to prevent Hackers inserting into db
             user: request.sanitize('user').escape().trim(),
             password: request.sanitize('password').escape().trim()
         };
-   //console.log(item.email);
 
    var query = "SELECT id, username FROM users WHERE username = '" + item.user + "' AND password ='" + item.password + "';";
-   //console.log(query);
 	 db.any(query)
             .then(function (result) {
             	if (result.length === 0) {
@@ -49,9 +32,8 @@ app.post('/', function(request, response){
                 	response.redirect('/login')
                 }
                 else {
+                  request.session.user = result[0];
 	                response.redirect('/')
-	                request.session.user = result[0];
-                  //console.log(request.session.user.id);
             	}
 
             }).catch(function (err) {
@@ -70,5 +52,3 @@ app.post('/', function(request, response){
         })
     }
 });
-
-module.exports = app;

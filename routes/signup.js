@@ -28,7 +28,7 @@ app.post('/', function(request, response){
             email: request.sanitize('email').escape().trim(),
             user: request.sanitize('user').escape().trim(),
             password: request.sanitize('password').escape().trim(),
-	          watchlist: '{"APPL", "TSLA", "FB"}'
+	          watchlist: '{"WFC", "AMD", "CHK"}'
         };
    //console.log(item.email);
 

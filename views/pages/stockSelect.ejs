@@ -15,14 +15,14 @@
       var company_names = []
 
       $(document).ready(function() {
-          var most_active_url = 'https://api.iextrading.com/1.0/stock/market/list/mostactive'
-          $.getJSON(most_active_url,function(json){
+          var in_focus_url = 'https://api.iextrading.com/1.0/stock/market/list/infocus'
+          $.getJSON(in_focus_url,function(json){
               var stock_url
-              //if there is data --> selected stocks displays companies that are the most active else display in focus companies
+              //if there is data --> selected stocks displays companies that are in focus else display most active companies
               if(json.length == 0){
-                  stock_url = 'https://api.iextrading.com/1.0/stock/market/list/infocus'
-              }else{
                   stock_url = 'https://api.iextrading.com/1.0/stock/market/list/mostactive'
+              }else{
+                  stock_url = 'https://api.iextrading.com/1.0/stock/market/list/infocus'
               }
 
               $.ajax({url:stock_url, dataType:"jsonp"}).then(function(data) {
@@ -63,10 +63,7 @@
 
                       var str_name = '#name' + num
                       $(str_name).text(value)
-                      /*
-                      var str_symb = '#symb' + num
-                      $(str_symb).text(key)
-                      */
+
                       //fetches company's logo
                       var url ='https://api.iextrading.com/1.0/stock/' + key + '/logo'
                       $.ajax({url:url, dataType:"jsonp"}).then(function(data_url) {
@@ -128,26 +125,12 @@
     <form action="/stockSelect" method="post">
         <div class="row">
                 <div class="col-sm-2 pd_none">
-                    <!--
-                		<div type="text" class="btn stock-btn" id="results1" name="symb1" value="1">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="symb1" value="option1">
-                            </div>
-                        </div>
-                    -->
                     <button type="button" class="btn stock-btn" id="results1">
                         <p id=name1>name1</p>
 
                     </button>
                 </div>
                 <div class="col-sm-2 pd_none">
-                <!--
-                    <div type="text" class="btn stock-btn" id="results2" name="symb2" value="2">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="symb2" value="option2">
-                        </div>
-                    </div>
-                -->
                     <button type="button" class="btn stock-btn" id="results2">
                         <p id=name2>name2</p>
 
@@ -155,13 +138,6 @@
 
                 </div>
                 <div class="col-sm-2 pd_none">
-                <!--
-                    <div type="text" class="btn stock-btn" id="results3" name="symb3" value="3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="symb3" value="option3">
-                        </div>
-                    </div>
-                -->
                     <button type="button" class="btn stock-btn" id="results3">
                         <p id=name3>name3</p>
 
@@ -169,13 +145,6 @@
 
                 </div>
                 <div class="col-sm-2 pd_none">
-                <!--
-                    <div type="text" class="btn stock-btn" id="results4" name="symb4" value="4">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="symb4" value="option4">
-                        </div>
-                    </div>
-                -->
                     <button type="button" class="btn stock-btn" id="results4">
                         <p id=name4>name4</p>
 
@@ -183,26 +152,12 @@
 
                 </div>
                 <div class="col-sm-2 pd_none">
-                <!--
-                   <div type="text" class="btn stock-btn" id="results5" name="symb5" value="5">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="symb5" value="option5">
-                        </div>
-                    </div>
-                -->
                     <button type="button" class="btn stock-btn" id="results5">
                         <p id=name5>name5</p>
 
                     </button>
                 </div>
                 <div class="col-sm-2 pd_none">
-                <!--
-                    <div type="text" class="btn stock-btn" id="results6" name="symb6" value="6">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="symb6" value="option6">
-                        </div>
-                    </div>
-                -->
                     <button type="button" class="btn stock-btn" id="results6">
                         <p id=name6>name6</p>
 
@@ -210,14 +165,6 @@
 
                 </div>
                 <div class="col-sm-2 pd_none">
-                <!--
-                    <div type="text" class="btn stock-btn" id="results7" name="symb7" value="7">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="symb7" value="option7">
-                        </div>
-                    </div>
-                -->
-
                     <button type="button" class="btn stock-btn" id="results7">
                         <p id=name7>name7</p>
 
@@ -225,13 +172,6 @@
 
                 </div>
                 <div class="col-sm-2 pd_none">
-                <!--
-                    <div type="text" class="btn stock-btn" id="results8" name="symb8" value="8">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="symb8" value="option8">
-                        </div>
-                    </div>
-                -->
                     <button type="button" class="btn stock-btn" id="results8">
                         <p id=name8>name8</p>
 
@@ -239,13 +179,7 @@
 
                 </div>
                 <div class="col-sm-2 pd_none">
-                <!--
-                    <div type="text" class="btn stock-btn" id="results9" name="symb9" value="9">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="symb9" value="option9">
-                        </div>
-                    </div>
-                -->
+
                     <button type="button" class="btn stock-btn" id="results9">
                         <p id=name9>name9</p>
 
@@ -253,13 +187,6 @@
 
                 </div>
                 <div class="col-sm-2 pd_none">
-                    <!--
-                    <div type="text" class="btn stock-btn" id="results10" name="symb10" value="10">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="symb10" value="option10">
-                        </div>
-                    </div>
-                    -->
                     <button type="button" class="btn stock-btn" id="results10">
                             <p id=name10>name10</p>
 
@@ -270,6 +197,7 @@
         <div class="row justify-content-md-center">
              <input type="Submit" class="btn submit-btn" id="submit-id" name="stock_list" value="<%= stock_list %>"/>
         </div>
+        <input type="hidden" name="_method" value="PUT"/>
     </form>
   </div>
 
