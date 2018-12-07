@@ -13,3 +13,22 @@ app.get('/', function(req, res){
 });
 
 module.exports = app;
+
+
+
+
+var express = require('express');
+var app = express();
+var db = require('../config/db');
+
+
+app.get('/foo', function(req, res){
+  var query = 'select watchlist from users where username='joe' and password='password';';
+  db.any(query).then(function(rows){
+  
+  render result as JSON object
+    res.json(rows)
+  )
+});
+
+module.exports = app;

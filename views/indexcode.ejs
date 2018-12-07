@@ -1,0 +1,54 @@
+$(document).ready(function() {
+          //var current_user_symbols_url = 'http://localhost:5000/myrecords?username="joe"&password="dontforgetme"'
+          //$.getJSON(current_user_symbols_url,function(symbols){
+          var user_id = req.session.user.id
+          var query = "select watchlist from users where id =" +user_id+ ";";
+          db.any(query).then(function(symbols){
+              var stock_url
+              var i;
+              for(i = 0 ; i < symbols.length; i++){
+                  var dataurl = "https://api.iextrading.com/1.0/stock/" +  symbols[i] + "/chart/1m"
+                  $.ajax({url:dataurl, dataType:"jsonp"}).then(function(data) {
+                    var trace1 = {
+                      type: "scatter",
+  								    mode: "lines",
+  								    name: symbols[i] + ' Daily Close',
+  								    x: unpack(data, 'date'),
+ 									    y: unpack(data, 'close'),
+  								    line: {color: '#17BECF'}
+									  }
+                  
+                    var trace2 = {
+                      type: "scatter",
+  								    mode: "lines",
+  								    name: symbols[i] + ' Daily Close',
+  								    x: unpack(data, 'date'),
+ 									    y: unpack(data, 'close'),
+  								    line: {color: '#17BECF'}
+									  }
+                    
+                    var data = [trace1,trace2];
+
+										var layout = {
+  										title: 'Basic Time Series',
+										};
+
+										Plotly.newPlot('myDiv', data, layout);
+										})
+                    
+                    function unpack(rows, key) { // from google search plotly.ds.csv example
+                       return rows.map(function(row) { return row[key]; 
+                    });
+                  }
+                  
+                  	var j;
+                  	for(j = 0 ; j < data.length; j++){
+                      	symb.push(data[j].symbol)
+                      	//cut off company name if it exceeds 25 characters
+                      	var letter_limit = 25;
+  
+                  }
+
+                      
+                      
+                      
