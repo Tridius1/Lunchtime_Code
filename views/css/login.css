@@ -56,18 +56,28 @@ h1 {
 .login-btn {
 	background: darkseagreen;
 	border-color: white;
-	border-width: 2px;
-	border-radius: 3px;
+	border-width: 3px;
+	border-radius: 5px;
   width: 100px;
 }
 
 .sign-btn {
   background: darkseagreen;
 	border-color: white;
-	border-width: 2px;
-	border-radius: 3px;
+	border-width: 3px;
+	border-radius: 5px;
   width: 100px;
+
 }
+
+.login-btn:hover {
+  background: white;
+}
+
+.sign-btn:hover {
+  background: white;
+}
+
 
 .bigform {
   width: 90%;

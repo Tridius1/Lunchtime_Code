@@ -50,6 +50,10 @@ h1 {
 	width: 90%;
 }
 
+.btn{
+  padding: 10px;;
+}
+
 .submit-btn {
 	background: darkseagreen;
 	border-color: white;
@@ -57,6 +61,6 @@ h1 {
 	border-radius: 5px;
 }
 
-.submit-btn:focus {
+.submit-btn:hover {
 	background: white;
 }
