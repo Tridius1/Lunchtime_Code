@@ -3,22 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <title>Index</title>
-  <%- include /layouts/header.ejs %>
+  <%- include ./layouts/header.ejs %>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <link rel="stylesheet" href="/css/index.css">
   <script src="http://code.jquery.com/jquery-2.2.0.js"></script>
 
 <script>
   $(document).ready(function() {
+
       TESTER = document.getElementById('tester');
+      
+      var trace1 = {
+	type: "scatter",
+	mode: "lines",
+	name: 'high',
+	x: <%- JSON.stringify(objArray[0].myDates) %>,
+	y: <%- JSON.stringify(objArray[0].myHighs) %>,
+	line: {color: '#17BECF'}
+      }
+
+      var trace2 = {
+        type: "scatter",
+        mode: "lines",
+        name: 'low',
+        x: <%- JSON.stringify(objArray[0].myDates) %>,
+        y: <%- JSON.stringify(objArray[0].myLows) %>,
+        line: {color: '#7F7F7F'}
+      }
+
+      var allData = [trace1, trace2];
+      var layout = {
+	title: <%- JSON.stringify(objArray[0].mySym) %>,
+      }
+
+      Plotly.newPlot('myDiv', allData, layout)
+
+
+
+
+
+
+
+
+
       Plotly.plot( TESTER, [{
-      x: [<%= x %>],
-      y: [<%= y %>] }], {
+      x: <%- JSON.stringify(objArray[0].myDates) %>,
+      y: <%- JSON.stringify(objArray[0].myHighs) %> }], {
       margin: { t: 0 } } );
     });
+
 </script>
 
 </head>
+<<<<<<< HEAD
 
   <h1>INDEX PAGE</h1>
   <h2><a href="stockSelect">StockSelect</a> </h2>
@@ -29,37 +66,38 @@
   <% if (messages.success) { %>
      <p style="color:green"><%- messages.success %></p>
   <% } %>
+  <div
   <div class="container-fluid">
+=======
+  <div class="header">
+    <h1>INDEX PAGE</h1>
+    <% if (messages.error) { %>
+     <p style="color:red;margin-top: 15px;"><%- messages.error %></p>
+    <% } %>
+    <% if (messages.success) { %>
+       <p style="color:green;margin-top: 15px;"><%- messages.success %></p>
+    <% } %>
+  </div>
+  <div class="container">
+>>>>>>> 8953e11e32d1c88f436d76777cd7185e27c82ffb
   	<h3> Your Stocks </h3>
     <div class="row">
-        <div class="col-sm-8 pd_none">
-        	<form>
-        		<button type="button" class="btn stock-btn"></button>
-        	</form>
-        </div>
-        <div class="col-sm-8 pd_none">
-            <form>
-        		<button type="button" class="btn stock-btn"></button>
-        	</form>
-        </div>
-        <div class="col-sm-8 pd_none">
-            <form>
-        		<button type="button" class="btn stock-btn"></button>
-        	</form>
-        </div>
-        <div class="col-sm-8 pd_none">
-            <form>
-        		<button type="button" class="btn stock-btn"></button>
-        	</form>
-        </div>
-        <div class="col-sm-8 pd_none">
-            <form>
-        		<button type="button" class="btn stock-btn"></button>
-        	</form>
+        <div class="buttonContainer">
+        		<button type="button" class="btnStock"></button>
+            <button type="button" class="btnStock"></button>
+            <button type="button" class="btnStock"></button>
+            <button type="button" class="btnStock"></button>
         </div>
     </div>
+<<<<<<< HEAD
   </div>
-  <div id="tester" style="max-width:600px;height:250px; margin:auto"></div>
+  <div id="tester" style="max-width:600px;height:250px; margin:auto"></div><br>
 
+  <div id="myDiv" style="max-width:600px;height:250px; margin:auto"></div>
+=======
+
+    <div id="tester"></div>
+  </div>
+>>>>>>> 8953e11e32d1c88f436d76777cd7185e27c82ffb
 </body>
 </html>
