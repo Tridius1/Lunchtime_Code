@@ -1,22 +1,59 @@
 var assert = require('chai').assert;
 var expect = require('chai').expect;
 var request = require('supertest');
-var express = require('express');
-var app = express();
 
 
+function makeServer() {
+	var express = require('express');
+	var app = express();
+	app.get('/', function (req, res) {
+		res.status(200).send('ok');
+	});
+	var server = app.listen(3000, function () {
+		var port = server.address().port;
+		console.log('Test server listening at port %s', port);
+	});
+	return server;
+}
 
 
+describe('Loading express', function () {
+	var server;
+	beforeEach(function () {
+		server = makeServer();
+	});
+	afterEach(function () {
+		server.close();
+	});
+	it('responds to /', function testSlash(done) {
+	request(server)
+		.get('/')
+		.expect(200, done);
+	});
+	it('404 everything else', function testPath(done) {
+		request(server)
+			.get('/foo/bar')
+			.expect(404, done);
+	});
+});
 
 
 
 /*
-
 describe('GET pages', function() {
+	var server;
+	beforeEach(function () {
+		server = makeServer();
+	});
+	afterEach(function () {
+		server.close();
+	});
+
 	it('should return 200 when getting login', function(done){
-		request(app).get('login').expect('Location', '/login').expect(200, done);
+		request(server).get('/login').expect(200, done);
 	});
 });
+
 
 
 describe('/login', function() {
@@ -55,3 +92,5 @@ describe('/login', function() {
 	});
 
 });
+
+*/
