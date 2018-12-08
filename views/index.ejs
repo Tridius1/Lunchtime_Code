@@ -11,7 +11,15 @@
 <script>
   $(document).ready(function() {
 
-    var logo = <%- JSON.stringify(url[0]) %>;
+    var logo = <%- JSON.stringify(url) %>;
+    
+    var i;
+    var str_logo = "#image";
+    for(i = 0; i < logo.length; i++){
+
+      $(str_logo + i).css({'background-image' : 'url(' + logo[i] + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
+    }
+    
     
 
       TESTER = document.getElementById('tester');
@@ -65,18 +73,28 @@
   </div>
   <div class="container">
     <h3> Your Stocks </h3>
-    <div class="row">
-        <div class="buttonContainer">
-            <button type="button" class="btnStock"></button>
-            <button type="button" class="btnStock"></button>
-            <button type="button" class="btnStock"></button>
-            <button type="button" class="btnStock"></button>
-        </div>
+   
+       
+          <div class="row">
+            <div class="col-sm-2 pd_none">
+              <button type="button" class="btnStock" id="image0"></button>
+            </div>
+            <div class="col-sm-2 pd_none">
+              <button type="button" class="btnStock" id="image1"></button>
+            </div>
+            <div class="col-sm-2 pd_none">
+              <button type="button" class="btnStock" id="image2"></button>
+            </div>
+            <div class="col-sm-2 pd_none">
+              <button type="button" class="btnStock" id="image3"></button>
+            </div>
+         </div>
+      
 
           <div id="tester" style="max-width:600px;height:250px; margin:auto"></div>
 
           <div id="myDiv" style="max-width:600px;height:250px; margin:auto"></div>
-    </div>
+  
   </div>
 
 

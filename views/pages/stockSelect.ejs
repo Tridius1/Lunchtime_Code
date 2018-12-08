@@ -27,7 +27,7 @@
 
               $.ajax({url:stock_url, dataType:"jsonp"}).then(function(data) {
                   //populate symb with symbols and company_names with names
-                  console.log(data);
+                  //console.log(data);
                   var i;
                   for(i = 0 ; i < data.length; i++){
                       symb.push(data[i].symbol)
