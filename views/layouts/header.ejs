@@ -8,9 +8,14 @@
     <form class="form-inline" method="get" action="/" style="margin:0px">
       <button class="btn btn-md btn-outline-secondary" type="submit" style="color:white">Home</button>
     </form>
-    <form class="form-inline" method="get" action="/" style="margin:0px">
-      <button class="btn btn-md btn-outline-secondary"><a style="color:white" href="stockSelect">Stock Select</a></button>
+    <div style="display:flex;">
+    <form class="form-inline" method="get" action="/stockselect" style="margin:0px; margin-right: 10px;" >
+      <button class="btn btn-md btn-outline-secondary" style="color:white;">Stock Select</button>
     </form>
+    <form class="form-inline" method="get" action="/logout" style="margin:0px">
+      <button class="btn btn-md btn-outline-secondary" style="color:white;">logout</button>
+    </form>
+  </div>
   </nav>
 
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
