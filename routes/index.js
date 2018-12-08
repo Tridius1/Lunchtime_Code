@@ -59,14 +59,16 @@ app.get('/', function (request, response) {
 	        }
 	    }
 
-	    populateObject(myList).then(function(){;
+	    populateObject(myList).then(function(){
 		console.log('done calculating')
 	        console.log(jsonArr)
 	        console.log('^^^jsonArr^^^')
                 response.render('index', {
                     title: 'INDEX PAGE',
                     user: request.session.user,
-                    objArray: jsonArr
+                    objArray: jsonArr,
+		    counter: 0,
+		    objLength: jsonArr.length
             });
 
 	    })
