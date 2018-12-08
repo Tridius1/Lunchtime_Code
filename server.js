@@ -13,8 +13,9 @@ app.use(express.static(__dirname + '/views'));
 // set engine to ejs
 app.set('view engine', 'ejs');
 
-app.listen(PORT);
+var server = app.listen(PORT);
 console.log('Listening on port ' + PORT + '...');
+module.exports = server;
 
 var expressValidator = require('express-validator');
 app.use(expressValidator());
@@ -70,3 +71,4 @@ app.use('/signup', signup);
 //stockSelect
 var stockSelect = require('./routes/stockSelect');
 app.use('/stockSelect', stockSelect);
+

@@ -10,8 +10,6 @@ app.get('/', function (request, response) {
     //var query = 'select watchlist from users where id = $1';
   // if(request.session.user)
     //console.log(id);
-    res.status(200).send('ok');
-    
     if(request.session.user){
     var id = request.session.user.id;
     db.any('select watchlist from users where id = $1', id)
