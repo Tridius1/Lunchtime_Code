@@ -40,11 +40,11 @@ app.post('/', function(request, response){
 
                 var user_id;
 
-                db.any("SELECT COUNT(*) FROM users;").then(function(red){
-                    user_id = (parseInt(red[0].count) + 1).toString();
+                db.any("SELECT id FROM users ORDER BY id DESC LIMIT 1").then(function(red){
+                    user_id = red[0].id;
                     db.any("SELECT id, username FROM users WHERE id=" + user_id + ";").then(function(rez){
                         request.session.user = rez[0];
-                        response.redirect('/')
+                        response.redirect('/stockSelect')
                     }).catch(function(err) {
                         request.flash('error', err);
                     })
