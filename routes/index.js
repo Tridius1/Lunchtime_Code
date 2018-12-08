@@ -54,3 +54,8 @@ app.get('/', function (request, response) {
     response.redirect('/login');
   }
 });
+
+app.get('/logout', function (request, response){
+  request.session.destroy()
+  response.redirect('/login');
+});

@@ -1,5 +1,5 @@
 body{
-  background: white;
+  background: #B8D8D8;
 }
 
 h3 {
@@ -15,14 +15,12 @@ h3 {
   margin-top: 15px;
 }
 .container{
-  width: 80vw;
+  width: 800px;
   background: white;
   border-radius: 5px;
-  border: 2px solid black;
   display: flex;
   flex-direction:column;
   justify-content: space-between;
-  background: lightslategrey; 
 }
 
 .buttonContainer{

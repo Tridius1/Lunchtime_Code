@@ -51,7 +51,7 @@ app.post('/', function(request, response){
                 }).catch(function (err) {
                     request.flash('error', err);
                 })
-                
+
                 /*
                 response.render('pages/signup', {
                     email: '',
@@ -59,7 +59,7 @@ app.post('/', function(request, response){
                     password: ''
                 })
                 */
-                
+
             }).catch(function (err) {
             request.flash('error', err);
             response.render('pages/signup', {
@@ -78,4 +78,8 @@ app.post('/', function(request, response){
             password: request.body.password
         })
     }
+});
+
+app.get('/stockselect', function (request, response){
+  response.redirect('/stockSelect');
 });
