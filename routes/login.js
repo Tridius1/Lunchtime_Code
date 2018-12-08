@@ -5,6 +5,8 @@ module.exports = app;
 
 app.get('/', function(req, res){
   	//render views/login.ejs template file
+  	res.status(200).send('ok');
+  	
   	res.render('pages/login', {
   		title: 'this is the login page',
     	user: '',
