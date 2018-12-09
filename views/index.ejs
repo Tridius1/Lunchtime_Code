@@ -12,16 +12,25 @@
   $(document).ready(function() {
 
     var logo = <%- JSON.stringify(url[0]) %>;
+      
+      var infoJS = <%- JSON.stringify(objArray) %>
+      console.log(infoJS[0].myDates+ ' test1')
+      for (var j = 0; j < <%- objLength %>; j++){
+	console.log(infoJS[j].myHighs + 'index number: ' + j)
+      }
     
-
+      console.log(<%- JSON.stringify(objArray[0]) %>)
       TESTER = document.getElementById('tester');
       
+
+      for (var i = 0; i < <%- objLength %>; i++){
+
       var trace1 = {
         type: "scatter",
         mode: "lines",
         name: 'high',
-        x: <%- JSON.stringify(objArray[0].myDates) %>,
-        y: <%- JSON.stringify(objArray[0].myHighs) %>,
+        x: infoJS[i].myDates,
+        y: infoJS[i].myHighs,
         line: {color: '#17BECF'},
       }
 
@@ -29,25 +38,21 @@
         type: "scatter",
         mode: "lines",
         name: 'low',
-        x: <%- JSON.stringify(objArray[0].myDates) %>,
-        y: <%- JSON.stringify(objArray[0].myLows) %>,
+        x: infoJS[i].myDates,
+        y: infoJS[i].myLows,
         line: {color: '#7F7F7F'}
       }
 
       var allData = [trace1, trace2];
       var layout = {
-        title: <%- JSON.stringify(objArray[0].mySym) %>,
+        title: infoJS[i].mySym
       }
 
-      Plotly.newPlot('myDiv', allData, layout)
+      Plotly.newPlot('myDiv' + i, allData, layout)
 
-
-      Plotly.plot( TESTER, [{
-      x: <%- JSON.stringify(objArray[0].myDates) %>,
-      y: <%- JSON.stringify(objArray[0].myHighs) %> }], {
-      margin: { t: 0 } } );
-      });
-
+      }
+  
+  })
       
       
 
@@ -73,9 +78,15 @@
             <button type="button" class="btnStock"></button>
         </div>
 
-          <div id="tester" style="max-width:600px;height:250px; margin:auto"></div>
 
-          <div id="myDiv" style="max-width:600px;height:250px; margin:auto"></div>
+
+          <div id="myDiv0" style="max-width:750px;height:400px; margin:auto"></div><br>
+          <div id="myDiv1" style="max-width:750px;height:400px; margin:auto"></div><br>
+          <div id="myDiv2" style="max-width:750px;height:400px; margin:auto"></div><br>
+          <div id="myDiv3" style="max-width:750px;height:400px; margin:auto"></div><br>
+          <div id="myDiv4" style="max-width:750px;height:400px; margin:auto"></div><br>
+          <div id="myDiv5" style="max-width:750px;height:400px; margin:auto"></div><br>
+
     </div>
   </div>
 

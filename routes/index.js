@@ -58,27 +58,17 @@ app.get('/', function (request, response) {
 	        }
 	    }
 
-<<<<<<< HEAD
-	    populateObject(myList).then(function(){
-		console.log('done calculating')
-	        console.log(jsonArr)
-	        console.log('^^^jsonArr^^^')
-=======
 	    populateObject(myList).then(function(){;
-		      //console.log('done calculating')
+		//console.log('done calculating')
 	        //console.log(jsonArr)
 	        //console.log('^^^jsonArr^^^')
->>>>>>> 86f3052b409f03e1a74cb418c4d1aef03a6fcf87
                 response.render('index', {
                     title: 'INDEX PAGE',
                     user: request.session.user,
                     objArray: jsonArr,
-<<<<<<< HEAD
 		    counter: 0,
-		    objLength: jsonArr.length
-=======
+		    objLength: jsonArr.length,
                     url: logo_list
->>>>>>> 86f3052b409f03e1a74cb418c4d1aef03a6fcf87
             });
 
 	    })
