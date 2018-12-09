@@ -1,10 +1,11 @@
 body{
-  background: #B8D8D8;
+  background: darkseagreen;
 }
 
 h3 {
   font-size: 30px;
   padding-top: 20px;
+  margin-left: 10px;
 }
 .header{
   max-width: 720px;
@@ -15,13 +16,14 @@ h3 {
   margin-top: 15px;
 }
 .container{
-  width: 800px;
+  width: 100%;
   background: white;
   border-radius: 5px;
   display: flex;
   flex-direction:column;
   justify-content: space-between;
 }
+
 
 .buttonContainer{
  width: 100%;
@@ -33,25 +35,33 @@ h3 {
  border-radius: 5px;
 }
 
-.row {
+
+.row-stk {
   width: 100%;
-  margin-left: 20px;
+  height: 20%;
+  margin-top: 50px;
 }
 
-.col-sm-2 {
-  height: 20%;
+.col {
   margin: 25px;
-  border-radius: 10px;
-  
 }
 
 .btnStock{
  width: 100%;
   height: 100%;
-  border: none;
   border-radius: 10px;
+  border: none;
   background: white;
   color: rgba(225,225,225,0);
+}
+
+.btnStock:hover {
+  color: rgba(225,225,225,1);
+  border-color: lightgray;
+  border-width: 10px;
+  background-image: none !important;
+  background: rgba(0,0,0,0.6);
+
 }
 
 .pd_none {

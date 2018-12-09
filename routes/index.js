@@ -34,6 +34,7 @@ app.get('/', function (request, response) {
                         var image_url = await https.get('https://api.iextrading.com/1.0/stock/' + bookmarks[i] + '/logo');
                         logo_list.push(image_url.data.url);
 
+
                     
                         highs = jsonQuery('data.high', {data: res}).value;
                         //console.log('TEST ^^^')
@@ -55,7 +56,10 @@ app.get('/', function (request, response) {
                         console.log(error);
                     }
                     //workds console.log(jsonArr);
+
+                   
 	        }
+
 	    }
 
 	    populateObject(myList).then(function(){;
@@ -67,6 +71,7 @@ app.get('/', function (request, response) {
                     user: request.session.user,
                     objArray: jsonArr,
                     url: logo_list
+                 
             });
 
 	    })

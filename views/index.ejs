@@ -12,15 +12,17 @@
   $(document).ready(function() {
 
     var logo = <%- JSON.stringify(url) %>;
+
     
     var i;
     var str_logo = "#image";
     for(i = 0; i < logo.length; i++){
 
       $(str_logo + i).css({'background-image' : 'url(' + logo[i] + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center'});
+
+  
     }
-    
-    
+
 
       TESTER = document.getElementById('tester');
       
@@ -72,30 +74,73 @@
     <% } %>
   </div>
   <div class="container">
-    <h3> Your Stocks </h3>
-   
-       
-          <div class="row">
-            <div class="col-sm-2 pd_none">
-              <button type="button" class="btnStock" id="image0"></button>
-            </div>
-            <div class="col-sm-2 pd_none">
-              <button type="button" class="btnStock" id="image1"></button>
-            </div>
-            <div class="col-sm-2 pd_none">
-              <button type="button" class="btnStock" id="image2"></button>
-            </div>
-            <div class="col-sm-2 pd_none">
-              <button type="button" class="btnStock" id="image3"></button>
-            </div>
-         </div>
-      
+    <div class="row">
+      <div class="col-3">
+         
+          <h3> Your Stocks </h3>
+        
+          <div class="row-stk">
+              <button type="button" class="btnStock" id="image0">
+                <p id=name1>name1</p>
+              </button>
+          </div>
+          <div class="row-stk">
+              <button type="button" class="btnStock" id="image1">
+                <p id=name1>name1</p>
+              </button>
+          </div>
+          <div class="row-stk">
+              <button type="button" class="btnStock" id="image2">
+                <p id=name1>name1</p>
+              </button>
+          </div>
+          <div class="row-stk">
+              <button type="button" class="btnStock" id="image3">
+                <p id=name1>name1</p>
+              </button>
+          </div>
+          <div class="row-stk">
+              <button type="button" class="btnStock" id="image4">
+                <p id=name1>name1</p>
+              </button>
+          </div>
+          <div class="row-stk">
+              <button type="button" class="btnStock" id="image5">
+                <p id=name1>name1</p>
+              </button>
+          </div>
+          <div class="row-stk">
+              <button type="button" class="btnStock" id="image6">
+                <p id=name1>name1</p>
+              </button>
+          </div>
+          <div class="row-stk">
+              <button type="button" class="btnStock" id="image7">
+                <p id=name1>name1</p>
+              </button>
+          </div>
+          <div class="row-stk">
+              <button type="button" class="btnStock" id="image8">
+                <p id=name1>name1</p>
+              </button>
+          </div>
+          <div class="row-stk">
+              <button type="button" class="btnStock" id="image9">
+                <p id=name1>name1</p>
+              </button>
+          </div>
+        
+      </div>
+      <div class="col">
+        <div id="tester" style="max-width:600px;height:250px; margin:auto"></div>
 
-          <div id="tester" style="max-width:600px;height:250px; margin:auto"></div>
-
-          <div id="myDiv" style="max-width:600px;height:250px; margin:auto"></div>
-  
+        <div id="myDiv" style="max-width:600px;height:250px; margin:auto"></div>
+      </div>
+    </div>
   </div>
+
+
+  
 
 
 </body>
