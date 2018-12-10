@@ -15,7 +15,7 @@ h3 {
   margin-top: 15px;
 }
 .container{
-  width: 800px;
+  width: 1500px;
   background: white;
   border-radius: 5px;
   display: flex;
@@ -24,8 +24,8 @@ h3 {
 }
 
 .buttonContainer{
- width: 100%;
- background: white;
+ width: 95%;
+ background: darkseagreen;
  display: flex;
  flex-direction: row;
  justify-content: space-around;
@@ -34,10 +34,11 @@ h3 {
 }
 
 .btnStock{
-  height: 100px;
+  height: 90px;
   width: 100px;
   margin: 10px;
-  border: solid 1px black;
+  background: rgba(0,0,0,0.6);
+  border: none;
   border-radius: 3px;
 }
 
@@ -46,4 +47,8 @@ h3 {
   height:500px;
   margin:auto;
   margin-bottom: 20px; */
+}
+
+.hide {
+  display: none;
 }

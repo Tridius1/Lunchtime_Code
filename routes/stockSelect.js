@@ -17,7 +17,7 @@ module.exports = app;
 
 
 app.put('/', function (req, res) {
-	if(request.session.user){
+	if(req.session.user){
 		//change for later
 		var user_id = req.session.user.id;
 		var stocks = [];
@@ -76,6 +76,6 @@ app.put('/', function (req, res) {
 	}
     else{
     var err = new Error("Not logged in!");
-    response.redirect('/login');
+    res.redirect('/login');
   }
 });

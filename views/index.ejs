@@ -11,19 +11,29 @@
 <script>
   $(document).ready(function() {
 
-    var logo = <%- JSON.stringify(url[0]) %>;
-      
-      var infoJS = <%- JSON.stringify(objArray) %>
-      console.log(infoJS[0].myDates+ ' test1')
-      for (var j = 0; j < <%- objLength %>; j++){
-	console.log(infoJS[j].myHighs + 'index number: ' + j)
-      }
-    
-      console.log(<%- JSON.stringify(objArray[0]) %>)
-      TESTER = document.getElementById('tester');
-      
+    var MAX_LENGTH = 10;
 
-      for (var i = 0; i < <%- objLength %>; i++){
+    var logo = <%- JSON.stringify(url) %>;
+
+    var i;
+    var str_logo = "#image";
+    for(i = 0; i < logo.length; i++){
+
+      $(str_logo + i).css({'background-image' : 'url(' + logo[i] + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center', 'background-size' : 'contain'});
+  
+    }
+      
+    var infoJS = <%- JSON.stringify(objArray) %>
+    console.log(infoJS[0].myDates+ ' test1')
+    for (var j = 0; j < <%- objLength %>; j++){
+      console.log(infoJS[j].myHighs + 'index number: ' + j)
+    }
+  
+    console.log(<%- JSON.stringify(objArray[0]) %>)
+    TESTER = document.getElementById('tester');
+    
+
+    for (var i = 0; i < <%- objLength %>; i++){
 
       var trace1 = {
         type: "scatter",
@@ -50,7 +60,12 @@
 
       Plotly.newPlot('myDiv' + i, allData, layout)
 
-      }
+    }
+
+    for(var j = <%- objLength %>; j < MAX_LENGTH; j++) {
+      $("#myDiv" + j).addClass('hide');
+    }
+
   
   })
       
@@ -72,26 +87,50 @@
     <h3> Your Stocks </h3>
     <div class="row">
         <div class="buttonContainer">
-            <button type="button" class="btnStock"></button>
-            <button type="button" class="btnStock"></button>
-            <button type="button" class="btnStock"></button>
-            <button type="button" class="btnStock"></button>
+            <button type="button" class="btnStock" id="image0"></button>
+            <button type="button" class="btnStock" id="image1"></button>
+            <button type="button" class="btnStock" id="image2"></button>
+            <button type="button" class="btnStock" id="image3"></button>
+            <button type="button" class="btnStock" id="image4"></button>
+            <button type="button" class="btnStock" id="image5"></button>
+            <button type="button" class="btnStock" id="image6"></button>
+            <button type="button" class="btnStock" id="image7"></button>
+            <button type="button" class="btnStock" id="image8"></button>
+            <button type="button" class="btnStock" id="image9"></button>
         </div>
-
-
-
+      </div>
+      <div class="row">
           <div id="myDiv0" style="max-width:750px;height:400px; margin:auto"></div><br>
+      </div>
+      <div class="row">
           <div id="myDiv1" style="max-width:750px;height:400px; margin:auto"></div><br>
+      </div>
+      <div class="row">
           <div id="myDiv2" style="max-width:750px;height:400px; margin:auto"></div><br>
+      </div>
+      <div class="row">
           <div id="myDiv3" style="max-width:750px;height:400px; margin:auto"></div><br>
+      </div>
+      <div class="row">
           <div id="myDiv4" style="max-width:750px;height:400px; margin:auto"></div><br>
+      </div>
+      <div class="row">
           <div id="myDiv5" style="max-width:750px;height:400px; margin:auto"></div><br>
+      </div>
+      <div class="row">
           <div id="myDiv6" style="max-width:750px;height:400px; margin:auto"></div><br>
+      </div>
+      <div class="row">
           <div id="myDiv7" style="max-width:750px;height:400px; margin:auto"></div><br>
+      </div>
+      <div class="row">
           <div id="myDiv8" style="max-width:750px;height:400px; margin:auto"></div><br>
+      </div>
+      <div class="row">
           <div id="myDiv9" style="max-width:750px;height:400px; margin:auto"></div><br>
+      </div>
 
-    </div>
+    
   </div>
 
 
