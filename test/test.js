@@ -6,12 +6,12 @@ var request = require('supertest');
 
 var app = require('../server');
 var instance;
-beforeEach(function(){
+before(function(){
 	// Clears the cache so a new server instance is used for each test.
        delete require.cache[require.resolve('../server')];
 	instance = app.listen(3000);
 });
-afterEach(function(){
+after(function(){
 	instance.close();
 })
 
@@ -41,8 +41,22 @@ describe('GET pages', function() {
 	});
 });
 
-
 /*
+
+
+
+describe('Login', function() {
+
+	it('should stay on login for invalid credetials', function(done) {
+		request(instance).post('/login').expect(200, done);
+	});
+
+});
+
+
+
+### FOR REFERENCE; DOESN'T WORK ###
+
 
 describe('Login', function() {
 
