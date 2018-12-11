@@ -7,20 +7,20 @@
   <link rel="stylesheet" href="../css/login.css">
 </head>
 
-<% if (messages.error) { %>
+<!-- <% if (messages.error) { %>
     <p style="color:red"><%- messages.error %></p>
 <% } %>
 <% if (messages.success) { %>
     <p style="color:green"><%- messages.success %></p>
-<% } %>
+<% } %> -->
 
   <div class="jumboton vertical-center">
     <div class="container-fluid text-center">
       <div class="row">
-        <h1> Login </h1>
+        <h1 style="font-size: 34px; color: white; padding-bottom: 0px;">StoX</h1>
+        <h1 style="padding-top:0px; padding-bottom:0px;"> Login </h1>
       </div>
       <div class="row justify-content-md-center">
-
         <form action="/login" method="post" class="bigform">
           <div class="form">
             <input type="text" class="form-control" placeholder="Username" name="user" id="user" value="<% user %>"/>
@@ -37,7 +37,7 @@
       <div class="row justify-content-md-center">
           <form class="form-inline">
             <div class="col">
-              <a class="btn" href="/signup"><button type="button" class="btn login-btn">Sign up!</button></a>
+              <a class="btn" href="/signup"><button type="button" class="btn login-btn" style="margin-top: -50px;">Sign up!</button></a>
             </div>
           </form>
       </div>

@@ -1,5 +1,5 @@
 body{
-  background: white;
+  background: url("cubes.png");
 }
 
 h1 {
@@ -67,7 +67,7 @@ h1 {
 	border-width: 3px;
 	border-radius: 5px;
   width: 100px;
-
+  margin-top: -50px;
 }
 
 .login-btn:hover {

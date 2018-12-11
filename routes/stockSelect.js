@@ -3,14 +3,16 @@ var app = express();
 var db = require('../config/db');
 
 app.get('/', function(req, res){
-  //render views/stockSelect.ejs template file
+  if(req.session.user){
   res.render('pages/stockSelect', {
   	title: 'STOCKSELECT',
   	stock_list: 'Add to List'
   })
-
-
-
+  }
+  else{
+    var err = new Error("Not logged in!");
+    res.redirect('/login');
+  }
 });
 
 module.exports = app;
