@@ -1,5 +1,5 @@
 body{
-  background: white;
+  background: url("cubes.png");
 }
 
 h1 {
@@ -7,21 +7,21 @@ h1 {
 }
 
 .container-fluid {
-	width: 95%;
+	width: 1200px;
 	border-radius: 20px;
 	background: darkseagreen;
 }
 
 .col-sm-2 {
 	height: 25%;
-	margin: 50px;
+	margin: 20px;
 	border-radius: 10px;
-	
+
 }
 
 .stock-btn {
-	width: 100%;
-	height: 100%;
+	width: 150px;
+	height: 150px;
 	border-radius: 10px;
 	background: white;
 	color: rgba(225,225,225,0);
@@ -54,18 +54,17 @@ p {
 }
 
 .submit-btn {
-	width: 15%;
-	height: 8%;
-	margin-bottom: 40px; 
-	border-radius: 10px;
+	width: 150px;
+	height: 60px;
+  margin: 40px;
+	border-radius: 5px;
 	background: rgba(0,0,0,0.6);
 	color: white;
 	font-size: 20px;
+  transition:ease all .3s;
 }
 
 .submit-btn:hover {
-	color: rgba(225,225,225,1);
-	border-color: lightgray;
-	border-width: 5px;
+	color: white;
+  background: darkgrey;
 }
-

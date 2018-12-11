@@ -7,19 +7,20 @@
   <link rel="stylesheet" href="../css/signup.css">
 </head>
 
-<% if (messages.error) { %>
+<!-- <% if (messages.error) { %>
     <p style="color:red"><%- messages.error %></p>
 <% } %>
 <% if (messages.success) { %>
     <p style="color:green"><%- messages.success %></p>
-<% } %>
+<% } %> -->
 
   <div class="jumboton vertical-center">
-    
+
     <div class="container-fluid text-center">
       <form action="/signup" method="post">
       <div class="row">
-        <h1> Sign up </h1>
+        <h1 style="font-size: 34px; color: white; padding-bottom: 0px;">StoX</h1>
+        <h1 style="padding-top: 0px; padding-bottom:0px;"> Sign up </h1>
       </div>
       <div class="row justify-content-md-center">
           <input type="email" class="form-control" placeholder="Email" name="email" id="email" value="<% email %>"/>
@@ -32,11 +33,11 @@
       </div>
       <br>
       <div class="row justify-content-md-center">
-            <a class="btn" href="/"><button type="submit" name="Submit" class="btn submit-btn">Sign Up!</button></a>
+            <a class="btn" href="/"><button type="submit" name="Submit" class="btn submit-btn" style="margin-top: -40px;">Sign Up!</button></a>
       </div>
       </form>
       <div class="row justify-content-md-center">
-            <a class="btn" href="/login"><button type="submit" name="Submit" class="btn submit-btn">Back to Login</button></a>
+            <a class="btn" href="/login"><button type="submit" name="Submit" class="btn submit-btn" style="margin-top: -50px;">Back to Login</button></a>
       </div>
     </div>
   </div>

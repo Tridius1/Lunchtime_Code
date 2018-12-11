@@ -1,5 +1,5 @@
 body{
-  background: #B8D8D8;
+  background: darkseagreen;
 }
 
 h3 {
@@ -15,17 +15,18 @@ h3 {
   margin-top: 15px;
 }
 .container{
-  width: 1500px;
+  width: 960px;
   background: white;
   border-radius: 5px;
   display: flex;
   flex-direction:column;
   justify-content: space-between;
+  margin-bottom: 100px;
 }
 
 .buttonContainer{
  width: 95%;
- background: darkseagreen;
+ background: lightgrey;
  display: flex;
  flex-direction: row;
  justify-content: space-around;

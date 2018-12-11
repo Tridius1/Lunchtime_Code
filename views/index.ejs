@@ -20,18 +20,18 @@
     for(i = 0; i < logo.length; i++){
 
       $(str_logo + i).css({'background-image' : 'url(' + logo[i] + ')', 'background-repeat' : 'no-repeat', 'background-position' : 'center', 'background-size' : 'contain'});
-  
+
     }
-      
+
     var infoJS = <%- JSON.stringify(objArray) %>
     console.log(infoJS[0].myDates+ ' test1')
     for (var j = 0; j < <%- objLength %>; j++){
       console.log(infoJS[j].myHighs + 'index number: ' + j)
     }
-  
+
     console.log(<%- JSON.stringify(objArray[0]) %>)
     TESTER = document.getElementById('tester');
-    
+
 
     for (var i = 0; i < <%- objLength %>; i++){
 
@@ -66,22 +66,22 @@
       $("#myDiv" + j).addClass('hide');
     }
 
-  
+
   })
-      
-      
+
+
 
 </script>
 
 </head>
 
   <div class="header">
-    <% if (messages.error) { %>
+    <!-- <% if (messages.error) { %>
      <p style="color:red;margin-top: 15px;"><%- messages.error %></p>
     <% } %>
     <% if (messages.success) { %>
        <p style="color:green;margin-top: 15px;"><%- messages.success %></p>
-    <% } %>
+    <% } %> -->
   </div>
   <div class="container">
     <h3> Your Stocks </h3>
@@ -130,7 +130,7 @@
           <div id="myDiv9" style="max-width:750px;height:400px; margin:auto"></div><br>
       </div>
 
-    
+
   </div>
 
 

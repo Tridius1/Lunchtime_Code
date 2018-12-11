@@ -18,14 +18,14 @@ app.get('/', function (request, response) {
             var jsonArr = []
             var logo_list = []
 
-	
+
 	    async function populateObject(bookmarks){
 
                 for (var i = 0; i < myList.length; i++) {
                     //console.log(myList[i])
 		                //console.log(bookmarks)
                     //console.log('bookmarks before https.get ^')
-                    try { 
+                    try {
                         var res = await https.get('https://api.iextrading.com/1.0/stock/' + bookmarks[i] + '/chart/1m');
                         highs = [];
                         dates = [];
@@ -34,7 +34,7 @@ app.get('/', function (request, response) {
                         var image_url = await https.get('https://api.iextrading.com/1.0/stock/' + bookmarks[i] + '/logo');
                         logo_list.push(image_url.data.url);
 
-                    
+
                         highs = jsonQuery('data.high', {data: res}).value;
                         //console.log('TEST ^^^')
                         dates = jsonQuery("data.date", {data: res}).value;
@@ -46,10 +46,10 @@ app.get('/', function (request, response) {
                             myLows: lows,
                             myDates: dates
                         });
-                    
-                    
-                        //console.log(jsonArr); 
-                
+
+
+                        //console.log(jsonArr);
+
 
                     } catch(error) {
                         console.log(error);
