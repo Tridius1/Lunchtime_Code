@@ -1,12 +1,6 @@
 var pgp = require('pg-promise')();
 
-const dbConfig = {
-   host: 'localhost',
-   port: 5432,
-   database: 'lunchtime',
-   user: 'postgres',
-   password: 'admin'
-};
+const dbConfig = process.env.DATABASE_URL;
 
 var db = pgp(dbConfig);
 
